@@ -1,0 +1,1778 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Project xmlns="http://schemas.microsoft.com/project">
+  <Name>Mule Flow Complexity Analysis – Team-Sequenced Plan</Name>
+  <Title>Mule Flow Complexity Analysis – Team-Sequenced Plan</Title>
+  <Subject>Sprint backlog grouped by team</Subject>
+  <Manager>Migration PM</Manager>
+  <Company>Your Org</Company>
+  <StartDate>2024-01-01T08:00:00</StartDate>
+  <CurrencyCode>USD</CurrencyCode>
+  <Calendars>
+    <Calendar><UID>1</UID><Name>Standard</Name><IsBaseCalendar>1</IsBaseCalendar></Calendar>
+  </Calendars>
+  <Tasks>
+    <Task><UID>1</UID><ID>0</ID><Name>Mule Flow Complexity Analysis</Name><Summary>1</Summary></Task>
+    <Task><UID>11</UID><ID>11</ID><Name>Sprint 1</Name><Summary>1</Summary></Task>
+    <Task>
+      <UID>50</UID>
+      <ID>50</ID>
+      <Name>Expert Team | adding-a-new-customer-to-workday-revenue-management_1.4.0-SNAPSHOT::add-customer-flow (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Expert Team
+Application: adding-a-new-customer-to-workday-revenue-management_1.4.0-SNAPSHOT
+Flow: add-customer-flow</Notes>
+    </Task>
+    <Task>
+      <UID>62</UID>
+      <ID>62</ID>
+      <Name>Expert Team | rest-api-with-apikit_1.4.0-SNAPSHOT::get:/fixture/{homeTeamId}/{awayTeamId}:leagues-config (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Expert Team
+Application: rest-api-with-apikit_1.4.0-SNAPSHOT
+Flow: get:/fixture/{homeTeamId}/{awayTeamId}:leagues-config</Notes>
+    </Task>
+    <Task>
+      <UID>74</UID>
+      <ID>74</ID>
+      <Name>Expert Team | testing-apikit-with-munit_1.4.0-SNAPSHOT::post:/munit:api-config (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Expert Team
+Application: testing-apikit-with-munit_1.4.0-SNAPSHOT
+Flow: post:/munit:api-config</Notes>
+    </Task>
+    <Task>
+      <UID>86</UID>
+      <ID>86</ID>
+      <Name>Expert Team | service-orchestration-and-choice-routing_1.4.0-SNAPSHOT::manufacturers (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Expert Team
+Application: service-orchestration-and-choice-routing_1.4.0-SNAPSHOT
+Flow: manufacturers</Notes>
+    </Task>
+    <Task>
+      <UID>88</UID>
+      <ID>88</ID>
+      <Name>Senior Team | netsuite-data-retrieval_1.4.0-SNAPSHOT::get:/customers:netsuite-api-config (13 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT104H0M0S</Work>
+      <Duration>PT104H0M0S</Duration>
+      <Notes>
+Story Points: 13
+Team: Senior Team
+Application: netsuite-data-retrieval_1.4.0-SNAPSHOT
+Flow: get:/customers:netsuite-api-config</Notes>
+    </Task>
+    <Task>
+      <UID>100</UID>
+      <ID>100</ID>
+      <Name>Senior Team | web-service-consumer_1.4.0-SNAPSHOT::orderTshirt (13 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT104H0M0S</Work>
+      <Duration>PT104H0M0S</Duration>
+      <Notes>
+Story Points: 13
+Team: Senior Team
+Application: web-service-consumer_1.4.0-SNAPSHOT
+Flow: orderTshirt</Notes>
+    </Task>
+    <Task>
+      <UID>107</UID>
+      <ID>107</ID>
+      <Name>Standard Team | processing-orders-with-dataweave-and-APIkit_1.4.0-SNAPSHOT::OrderFlow (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Standard Team
+Application: processing-orders-with-dataweave-and-APIkit_1.4.0-SNAPSHOT
+Flow: OrderFlow</Notes>
+    </Task>
+    <Task>
+      <UID>119</UID>
+      <ID>119</ID>
+      <Name>Standard Team | soap-webservice-security_1.4.0-SNAPSHOT::SignedSamlTokenServiceFlow (5 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT40H0M0S</Work>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>
+Story Points: 5
+Team: Standard Team
+Application: soap-webservice-security_1.4.0-SNAPSHOT
+Flow: SignedSamlTokenServiceFlow</Notes>
+    </Task>
+    <Task>
+      <UID>131</UID>
+      <ID>131</ID>
+      <Name>Standard Team | importing-a-csv-file-into-ms-sharepoint::importing-a-csv-file-into-ms-sharepointFlow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: importing-a-csv-file-into-ms-sharepoint
+Flow: importing-a-csv-file-into-ms-sharepointFlow</Notes>
+    </Task>
+    <Task>
+      <UID>143</UID>
+      <ID>143</ID>
+      <Name>Standard Team | oauth2-client-credentials-using-the-HTTP-connector::httpclientcredentialsFlow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: oauth2-client-credentials-using-the-HTTP-connector
+Flow: httpclientcredentialsFlow</Notes>
+    </Task>
+    <Task>
+      <UID>155</UID>
+      <ID>155</ID>
+      <Name>Standard Team | xml-only-soap-webservice_1.4.0-SNAPSHOT::admitPatientService (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: xml-only-soap-webservice_1.4.0-SNAPSHOT
+Flow: admitPatientService</Notes>
+    </Task>
+    <Task>
+      <UID>167</UID>
+      <ID>167</ID>
+      <Name>Standard Team | oauth2-client-credentials-using-the-HTTP-connector::http-client-credentialsFlow (2 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT16H0M0S</Work>
+      <Duration>PT16H0M0S</Duration>
+      <Notes>
+Story Points: 2
+Team: Standard Team
+Application: oauth2-client-credentials-using-the-HTTP-connector
+Flow: http-client-credentialsFlow</Notes>
+    </Task>
+    <Task><UID>12</UID><ID>12</ID><Name>Sprint 2</Name><Summary>1</Summary></Task>
+    <Task>
+      <UID>63</UID>
+      <ID>63</ID>
+      <Name>Expert Team | sap-data-retrieval_1.4.0-SNAPSHOT::sap-api-main (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Expert Team
+Application: sap-data-retrieval_1.4.0-SNAPSHOT
+Flow: sap-api-main</Notes>
+    </Task>
+    <Task>
+      <UID>75</UID>
+      <ID>75</ID>
+      <Name>Expert Team | upload-to-ftp-after-converting-json-to-xml_1.4.0-SNAPSHOT::main (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Expert Team
+Application: upload-to-ftp-after-converting-json-to-xml_1.4.0-SNAPSHOT
+Flow: main</Notes>
+    </Task>
+    <Task>
+      <UID>87</UID>
+      <ID>87</ID>
+      <Name>Expert Team | track-a-custom-business-event_1.4.0-SNAPSHOT::custom-business-eventsFlow1 (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Expert Team
+Application: track-a-custom-business-event_1.4.0-SNAPSHOT
+Flow: custom-business-eventsFlow1</Notes>
+    </Task>
+    <Task>
+      <UID>89</UID>
+      <ID>89</ID>
+      <Name>Expert Team | netsuite-data-retrieval_1.4.0-SNAPSHOT::get:/items:netsuite-api-config (13 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT104H0M0S</Work>
+      <Duration>PT104H0M0S</Duration>
+      <Notes>
+Story Points: 13
+Team: Expert Team
+Application: netsuite-data-retrieval_1.4.0-SNAPSHOT
+Flow: get:/items:netsuite-api-config</Notes>
+    </Task>
+    <Task>
+      <UID>51</UID>
+      <ID>51</ID>
+      <Name>Senior Team | filtering-a-message_1.4.0-SNAPSHOT::filteringFlow1 (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Senior Team
+Application: filtering-a-message_1.4.0-SNAPSHOT
+Flow: filteringFlow1</Notes>
+    </Task>
+    <Task>
+      <UID>101</UID>
+      <ID>101</ID>
+      <Name>Senior Team | scatter-gather-flow-control_1.4.0-SNAPSHOT::scatter-gatherFlow (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Senior Team
+Application: scatter-gather-flow-control_1.4.0-SNAPSHOT
+Flow: scatter-gatherFlow</Notes>
+    </Task>
+    <Task>
+      <UID>108</UID>
+      <ID>108</ID>
+      <Name>Standard Team | processing-orders-with-dataweave-and-APIkit_1.4.0-SNAPSHOT-2::OrderFlow_2 (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Standard Team
+Application: processing-orders-with-dataweave-and-APIkit_1.4.0-SNAPSHOT-2
+Flow: OrderFlow_2</Notes>
+    </Task>
+    <Task>
+      <UID>120</UID>
+      <ID>120</ID>
+      <Name>Standard Team | using-transactional-scope-in-jms-to-database_1.4.0-SNAPSHOT::transactionsFlow1 (5 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT40H0M0S</Work>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>
+Story Points: 5
+Team: Standard Team
+Application: using-transactional-scope-in-jms-to-database_1.4.0-SNAPSHOT
+Flow: transactionsFlow1</Notes>
+    </Task>
+    <Task>
+      <UID>132</UID>
+      <ID>132</ID>
+      <Name>Standard Team | legacy-modernization_1.4.0-SNAPSHOT::Fulfillment_LegacySystemModernization (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: legacy-modernization_1.4.0-SNAPSHOT
+Flow: Fulfillment_LegacySystemModernization</Notes>
+    </Task>
+    <Task>
+      <UID>144</UID>
+      <ID>144</ID>
+      <Name>Standard Team | proxying-a-soap-api_1.4.0-SNAPSHOT::main (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: proxying-a-soap-api_1.4.0-SNAPSHOT
+Flow: main</Notes>
+    </Task>
+    <Task>
+      <UID>156</UID>
+      <ID>156</ID>
+      <Name>Standard Team | dataweave-with-flowreflookup_1.4.0-SNAPSHOT::LookUpSalesRegionFlow (2 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT16H0M0S</Work>
+      <Duration>PT16H0M0S</Duration>
+      <Notes>
+Story Points: 2
+Team: Standard Team
+Application: dataweave-with-flowreflookup_1.4.0-SNAPSHOT
+Flow: LookUpSalesRegionFlow</Notes>
+    </Task>
+    <Task>
+      <UID>168</UID>
+      <ID>168</ID>
+      <Name>Standard Team | processing-orders-with-dataweave-and-APIkit_1.4.0-SNAPSHOT::currency-main (2 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT16H0M0S</Work>
+      <Duration>PT16H0M0S</Duration>
+      <Notes>
+Story Points: 2
+Team: Standard Team
+Application: processing-orders-with-dataweave-and-APIkit_1.4.0-SNAPSHOT
+Flow: currency-main</Notes>
+    </Task>
+    <Task><UID>13</UID><ID>13</ID><Name>Sprint 3</Name><Summary>1</Summary></Task>
+    <Task>
+      <UID>52</UID>
+      <ID>52</ID>
+      <Name>Expert Team | import-contacts-into-salesforce_1.4.0-SNAPSHOT::Contacts_to_SFDC (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Expert Team
+Application: import-contacts-into-salesforce_1.4.0-SNAPSHOT
+Flow: Contacts_to_SFDC</Notes>
+    </Task>
+    <Task>
+      <UID>64</UID>
+      <ID>64</ID>
+      <Name>Expert Team | sending-a-csv-file-through-email-using-smtp_1.4.0-SNAPSHOT::csv-to-smtpFlow (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Expert Team
+Application: sending-a-csv-file-through-email-using-smtp_1.4.0-SNAPSHOT
+Flow: csv-to-smtpFlow</Notes>
+    </Task>
+    <Task>
+      <UID>76</UID>
+      <ID>76</ID>
+      <Name>Expert Team | foreach-processing-and-choice-routing_1.4.0-SNAPSHOT::loan-broker-sync (5 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT40H0M0S</Work>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>
+Story Points: 5
+Team: Expert Team
+Application: foreach-processing-and-choice-routing_1.4.0-SNAPSHOT
+Flow: loan-broker-sync</Notes>
+    </Task>
+    <Task>
+      <UID>90</UID>
+      <ID>90</ID>
+      <Name>Senior Team | netsuite-data-retrieval_1.4.0-SNAPSHOT::get:/oportunities:netsuite-api-config (13 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT104H0M0S</Work>
+      <Duration>PT104H0M0S</Duration>
+      <Notes>
+Story Points: 13
+Team: Senior Team
+Application: netsuite-data-retrieval_1.4.0-SNAPSHOT
+Flow: get:/oportunities:netsuite-api-config</Notes>
+    </Task>
+    <Task>
+      <UID>102</UID>
+      <ID>102</ID>
+      <Name>Senior Team | websphere-mq_1.4.0-SNAPSHOT::Input (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Senior Team
+Application: websphere-mq_1.4.0-SNAPSHOT
+Flow: Input</Notes>
+    </Task>
+    <Task>
+      <UID>109</UID>
+      <ID>109</ID>
+      <Name>Standard Team | cache-scope-with-fibonacci_1.4.0-SNAPSHOT::cache-exampleFlow1 (5 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT40H0M0S</Work>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>
+Story Points: 5
+Team: Standard Team
+Application: cache-scope-with-fibonacci_1.4.0-SNAPSHOT
+Flow: cache-exampleFlow1</Notes>
+    </Task>
+    <Task>
+      <UID>121</UID>
+      <ID>121</ID>
+      <Name>Standard Team | addition-using-javascript-transformer_1.4.0-SNAPSHOT::javascript-calculatorFlow1 (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: addition-using-javascript-transformer_1.4.0-SNAPSHOT
+Flow: javascript-calculatorFlow1</Notes>
+    </Task>
+    <Task>
+      <UID>133</UID>
+      <ID>133</ID>
+      <Name>Standard Team | login-form-using-the-http-connector_1.4.0-SNAPSHOT::DoLoginFlow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: login-form-using-the-http-connector_1.4.0-SNAPSHOT
+Flow: DoLoginFlow</Notes>
+    </Task>
+    <Task>
+      <UID>145</UID>
+      <ID>145</ID>
+      <Name>Standard Team | querying-a-db-and-attaching-results-to-an-email_1.4.0-SNAPSHOT::attachmentsFlow1 (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: querying-a-db-and-attaching-results-to-an-email_1.4.0-SNAPSHOT
+Flow: attachmentsFlow1</Notes>
+    </Task>
+    <Task>
+      <UID>157</UID>
+      <ID>157</ID>
+      <Name>Standard Team | exposing-a-restful-resource-using-the-HTTP-connector_1.4.0-SNAPSHOT::retrieveAllPersonsFlow (2 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT16H0M0S</Work>
+      <Duration>PT16H0M0S</Duration>
+      <Notes>
+Story Points: 2
+Team: Standard Team
+Application: exposing-a-restful-resource-using-the-HTTP-connector_1.4.0-SNAPSHOT
+Flow: retrieveAllPersonsFlow</Notes>
+    </Task>
+    <Task>
+      <UID>169</UID>
+      <ID>169</ID>
+      <Name>Standard Team | processing-orders-with-dataweave-and-APIkit_1.4.0-SNAPSHOT-2::currency-main (2 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT16H0M0S</Work>
+      <Duration>PT16H0M0S</Duration>
+      <Notes>
+Story Points: 2
+Team: Standard Team
+Application: processing-orders-with-dataweave-and-APIkit_1.4.0-SNAPSHOT-2
+Flow: currency-main</Notes>
+    </Task>
+    <Task><UID>14</UID><ID>14</ID><Name>Sprint 4</Name><Summary>1</Summary></Task>
+    <Task>
+      <UID>53</UID>
+      <ID>53</ID>
+      <Name>Expert Team | importing-an-email-attachment-using-the-POP3-connector_1.4.0-SNAPSHOT::pop-to-xmlFlow1 (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Expert Team
+Application: importing-an-email-attachment-using-the-POP3-connector_1.4.0-SNAPSHOT
+Flow: pop-to-xmlFlow1</Notes>
+    </Task>
+    <Task>
+      <UID>65</UID>
+      <ID>65</ID>
+      <Name>Expert Team | service-orchestration-and-choice-routing_1.4.0-SNAPSHOT::orderProxy (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Expert Team
+Application: service-orchestration-and-choice-routing_1.4.0-SNAPSHOT
+Flow: orderProxy</Notes>
+    </Task>
+    <Task>
+      <UID>77</UID>
+      <ID>77</ID>
+      <Name>Expert Team | service-orchestration-and-choice-routing_1.4.0-SNAPSHOT::priceService (5 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT40H0M0S</Work>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>
+Story Points: 5
+Team: Expert Team
+Application: service-orchestration-and-choice-routing_1.4.0-SNAPSHOT
+Flow: priceService</Notes>
+    </Task>
+    <Task>
+      <UID>91</UID>
+      <ID>91</ID>
+      <Name>Senior Team | rest-api-with-apikit_1.4.0-SNAPSHOT::put:/teams/{teamId}:leagues-config (13 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT104H0M0S</Work>
+      <Duration>PT104H0M0S</Duration>
+      <Notes>
+Story Points: 13
+Team: Senior Team
+Application: rest-api-with-apikit_1.4.0-SNAPSHOT
+Flow: put:/teams/{teamId}:leagues-config</Notes>
+    </Task>
+    <Task>
+      <UID>103</UID>
+      <ID>103</ID>
+      <Name>Senior Team | get-customer-list-from-netsuite_1.4.0-SNAPSHOT::get-customer-list-from-netsuiteFlow (5 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT40H0M0S</Work>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>
+Story Points: 5
+Team: Senior Team
+Application: get-customer-list-from-netsuite_1.4.0-SNAPSHOT
+Flow: get-customer-list-from-netsuiteFlow</Notes>
+    </Task>
+    <Task>
+      <UID>110</UID>
+      <ID>110</ID>
+      <Name>Standard Team | dataweave-with-flowreflookup_1.4.0-SNAPSHOT::CreateNewSalesforceAccountFlow (5 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT40H0M0S</Work>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>
+Story Points: 5
+Team: Standard Team
+Application: dataweave-with-flowreflookup_1.4.0-SNAPSHOT
+Flow: CreateNewSalesforceAccountFlow</Notes>
+    </Task>
+    <Task>
+      <UID>122</UID>
+      <ID>122</ID>
+      <Name>Standard Team | authenticating-salesforce-using-oauth2_1.4.0-SNAPSHOT::salesforce-oauthFlow1 (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: authenticating-salesforce-using-oauth2_1.4.0-SNAPSHOT
+Flow: salesforce-oauthFlow1</Notes>
+    </Task>
+    <Task>
+      <UID>134</UID>
+      <ID>134</ID>
+      <Name>Standard Team | mule-component-bindings::StockServiceFlow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: mule-component-bindings
+Flow: StockServiceFlow</Notes>
+    </Task>
+    <Task>
+      <UID>146</UID>
+      <ID>146</ID>
+      <Name>Standard Team | salesforce-data-retrieval_1.4.0-SNAPSHOT::salesforceDataRetrievalFlow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: salesforce-data-retrieval_1.4.0-SNAPSHOT
+Flow: salesforceDataRetrievalFlow</Notes>
+    </Task>
+    <Task>
+      <UID>158</UID>
+      <ID>158</ID>
+      <Name>Standard Team | hello-world_1.4.0-SNAPSHOT::HelloWorldFlow1 (2 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT16H0M0S</Work>
+      <Duration>PT16H0M0S</Duration>
+      <Notes>
+Story Points: 2
+Team: Standard Team
+Application: hello-world_1.4.0-SNAPSHOT
+Flow: HelloWorldFlow1</Notes>
+    </Task>
+    <Task>
+      <UID>170</UID>
+      <ID>170</ID>
+      <Name>Standard Team | proxying-a-rest-api_1.4.0-SNAPSHOT::rest-api-proxy (2 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT16H0M0S</Work>
+      <Duration>PT16H0M0S</Duration>
+      <Notes>
+Story Points: 2
+Team: Standard Team
+Application: proxying-a-rest-api_1.4.0-SNAPSHOT
+Flow: rest-api-proxy</Notes>
+    </Task>
+    <Task><UID>15</UID><ID>15</ID><Name>Sprint 5</Name><Summary>1</Summary></Task>
+    <Task>
+      <UID>54</UID>
+      <ID>54</ID>
+      <Name>Expert Team | jms-message-rollback-and-redelivery_1.4.0-SNAPSHOT::JMSRedeliver (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Expert Team
+Application: jms-message-rollback-and-redelivery_1.4.0-SNAPSHOT
+Flow: JMSRedeliver</Notes>
+    </Task>
+    <Task>
+      <UID>66</UID>
+      <ID>66</ID>
+      <Name>Expert Team | service-orchestration-and-choice-routing_1.4.0-SNAPSHOT::orderService (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Expert Team
+Application: service-orchestration-and-choice-routing_1.4.0-SNAPSHOT
+Flow: orderService</Notes>
+    </Task>
+    <Task>
+      <UID>78</UID>
+      <ID>78</ID>
+      <Name>Expert Team | web-service-consumer_1.4.0-SNAPSHOT::listInventory (5 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT40H0M0S</Work>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>
+Story Points: 5
+Team: Expert Team
+Application: web-service-consumer_1.4.0-SNAPSHOT
+Flow: listInventory</Notes>
+    </Task>
+    <Task>
+      <UID>92</UID>
+      <ID>92</ID>
+      <Name>Senior Team | rest-api-with-apikit_1.4.0-SNAPSHOT::put:/fixture/{homeTeamId}/{awayTeamId}:leagues-config (13 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT104H0M0S</Work>
+      <Duration>PT104H0M0S</Duration>
+      <Notes>
+Story Points: 13
+Team: Senior Team
+Application: rest-api-with-apikit_1.4.0-SNAPSHOT
+Flow: put:/fixture/{homeTeamId}/{awayTeamId}:leagues-config</Notes>
+    </Task>
+    <Task>
+      <UID>104</UID>
+      <ID>104</ID>
+      <Name>Senior Team | websphere-mq_1.4.0-SNAPSHOT::MessageProcessor (5 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT40H0M0S</Work>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>
+Story Points: 5
+Team: Senior Team
+Application: websphere-mq_1.4.0-SNAPSHOT
+Flow: MessageProcessor</Notes>
+    </Task>
+    <Task>
+      <UID>111</UID>
+      <ID>111</ID>
+      <Name>Standard Team | exposing-a-restful-resource-using-the-HTTP-connector_1.4.0-SNAPSHOT::storePersonFlow (5 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT40H0M0S</Work>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>
+Story Points: 5
+Team: Standard Team
+Application: exposing-a-restful-resource-using-the-HTTP-connector_1.4.0-SNAPSHOT
+Flow: storePersonFlow</Notes>
+    </Task>
+    <Task>
+      <UID>123</UID>
+      <ID>123</ID>
+      <Name>Standard Team | cache-scope-with-fibonacci_1.4.0-SNAPSHOT::calculateFibonacci (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: cache-scope-with-fibonacci_1.4.0-SNAPSHOT
+Flow: calculateFibonacci</Notes>
+    </Task>
+    <Task>
+      <UID>135</UID>
+      <ID>135</ID>
+      <Name>Standard Team | mule-expression-language-basics_1.4.0-SNAPSHOT::greetingFlow2 (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: mule-expression-language-basics_1.4.0-SNAPSHOT
+Flow: greetingFlow2</Notes>
+    </Task>
+    <Task>
+      <UID>147</UID>
+      <ID>147</ID>
+      <Name>Standard Team | sending-json-data-to-a-amqp-queue_1.4.0-SNAPSHOT::json-to-rabbitmqFlow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: sending-json-data-to-a-amqp-queue_1.4.0-SNAPSHOT
+Flow: json-to-rabbitmqFlow</Notes>
+    </Task>
+    <Task>
+      <UID>159</UID>
+      <ID>159</ID>
+      <Name>Standard Team | http-login-html-form::httpRenderFlow (2 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT16H0M0S</Work>
+      <Duration>PT16H0M0S</Duration>
+      <Notes>
+Story Points: 2
+Team: Standard Team
+Application: http-login-html-form
+Flow: httpRenderFlow</Notes>
+    </Task>
+    <Task>
+      <UID>171</UID>
+      <ID>171</ID>
+      <Name>Standard Team | querying-a-mysql-database_1.4.0-SNAPSHOT::database-to-jsonFlow (2 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT16H0M0S</Work>
+      <Duration>PT16H0M0S</Duration>
+      <Notes>
+Story Points: 2
+Team: Standard Team
+Application: querying-a-mysql-database_1.4.0-SNAPSHOT
+Flow: database-to-jsonFlow</Notes>
+    </Task>
+    <Task><UID>16</UID><ID>16</ID><Name>Sprint 6</Name><Summary>1</Summary></Task>
+    <Task>
+      <UID>55</UID>
+      <ID>55</ID>
+      <Name>Expert Team | netsuite-data-retrieval_1.4.0-SNAPSHOT::netsuite-api-main (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Expert Team
+Application: netsuite-data-retrieval_1.4.0-SNAPSHOT
+Flow: netsuite-api-main</Notes>
+    </Task>
+    <Task>
+      <UID>67</UID>
+      <ID>67</ID>
+      <Name>Expert Team | service-orchestration-and-choice-routing_1.4.0-SNAPSHOT::inhouseOrder (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Expert Team
+Application: service-orchestration-and-choice-routing_1.4.0-SNAPSHOT
+Flow: inhouseOrder</Notes>
+    </Task>
+    <Task>
+      <UID>79</UID>
+      <ID>79</ID>
+      <Name>Expert Team | foreach-processing-and-choice-routing_1.4.0-SNAPSHOT::TheCreditAgencyService (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Expert Team
+Application: foreach-processing-and-choice-routing_1.4.0-SNAPSHOT
+Flow: TheCreditAgencyService</Notes>
+    </Task>
+    <Task>
+      <UID>93</UID>
+      <ID>93</ID>
+      <Name>Senior Team | rest-api-with-apikit_1.4.0-SNAPSHOT::post:/teams:leagues-config (13 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT104H0M0S</Work>
+      <Duration>PT104H0M0S</Duration>
+      <Notes>
+Story Points: 13
+Team: Senior Team
+Application: rest-api-with-apikit_1.4.0-SNAPSHOT
+Flow: post:/teams:leagues-config</Notes>
+    </Task>
+    <Task>
+      <UID>105</UID>
+      <ID>105</ID>
+      <Name>Senior Team | scatter-gather-flow-control_1.4.0-SNAPSHOT::outboundFlow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Senior Team
+Application: scatter-gather-flow-control_1.4.0-SNAPSHOT
+Flow: outboundFlow</Notes>
+    </Task>
+    <Task>
+      <UID>112</UID>
+      <ID>112</ID>
+      <Name>Standard Team | import-contacts-into-ms-dynamics_1.4.0-SNAPSHOT::crm-create-account (5 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT40H0M0S</Work>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>
+Story Points: 5
+Team: Standard Team
+Application: import-contacts-into-ms-dynamics_1.4.0-SNAPSHOT
+Flow: crm-create-account</Notes>
+    </Task>
+    <Task>
+      <UID>124</UID>
+      <ID>124</ID>
+      <Name>Standard Team | content-based-routing_1.4.0-SNAPSHOT::content-based-routingFlow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: content-based-routing_1.4.0-SNAPSHOT
+Flow: content-based-routingFlow</Notes>
+    </Task>
+    <Task>
+      <UID>136</UID>
+      <ID>136</ID>
+      <Name>Standard Team | mule-expression-language-basics_1.4.0-SNAPSHOT::docs-greetingFlow3 (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: mule-expression-language-basics_1.4.0-SNAPSHOT
+Flow: docs-greetingFlow3</Notes>
+    </Task>
+    <Task>
+      <UID>148</UID>
+      <ID>148</ID>
+      <Name>Standard Team | sending-json-data-to-a-jms-queue_1.4.0-SNAPSHOT::json-to-jmsFlow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: sending-json-data-to-a-jms-queue_1.4.0-SNAPSHOT
+Flow: json-to-jmsFlow</Notes>
+    </Task>
+    <Task>
+      <UID>160</UID>
+      <ID>160</ID>
+      <Name>Standard Team | http-oauth-provider::redirectFlow (2 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT16H0M0S</Work>
+      <Duration>PT16H0M0S</Duration>
+      <Notes>
+Story Points: 2
+Team: Standard Team
+Application: http-oauth-provider
+Flow: redirectFlow</Notes>
+    </Task>
+    <Task>
+      <UID>172</UID>
+      <ID>172</ID>
+      <Name>Standard Team | soap-webservice-security_1.4.0-SNAPSHOT::UnsecureServiceFlow (2 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT16H0M0S</Work>
+      <Duration>PT16H0M0S</Duration>
+      <Notes>
+Story Points: 2
+Team: Standard Team
+Application: soap-webservice-security_1.4.0-SNAPSHOT
+Flow: UnsecureServiceFlow</Notes>
+    </Task>
+    <Task><UID>17</UID><ID>17</ID><Name>Sprint 7</Name><Summary>1</Summary></Task>
+    <Task>
+      <UID>56</UID>
+      <ID>56</ID>
+      <Name>Expert Team | rest-api-with-apikit_1.4.0-SNAPSHOT::main (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Expert Team
+Application: rest-api-with-apikit_1.4.0-SNAPSHOT
+Flow: main</Notes>
+    </Task>
+    <Task>
+      <UID>68</UID>
+      <ID>68</ID>
+      <Name>Expert Team | service-orchestration-and-choice-routing_1.4.0-SNAPSHOT::samsungService (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Expert Team
+Application: service-orchestration-and-choice-routing_1.4.0-SNAPSHOT
+Flow: samsungService</Notes>
+    </Task>
+    <Task>
+      <UID>80</UID>
+      <ID>80</ID>
+      <Name>Expert Team | foreach-processing-and-choice-routing_1.4.0-SNAPSHOT::Bank1Flow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Expert Team
+Application: foreach-processing-and-choice-routing_1.4.0-SNAPSHOT
+Flow: Bank1Flow</Notes>
+    </Task>
+    <Task>
+      <UID>94</UID>
+      <ID>94</ID>
+      <Name>Senior Team | sap-data-retrieval_1.4.0-SNAPSHOT::get:/customers:sap-api-config (13 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT104H0M0S</Work>
+      <Duration>PT104H0M0S</Duration>
+      <Notes>
+Story Points: 13
+Team: Senior Team
+Application: sap-data-retrieval_1.4.0-SNAPSHOT
+Flow: get:/customers:sap-api-config</Notes>
+    </Task>
+    <Task>
+      <UID>106</UID>
+      <ID>106</ID>
+      <Name>Senior Team | websphere-mq_1.4.0-SNAPSHOT::Output (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Senior Team
+Application: websphere-mq_1.4.0-SNAPSHOT
+Flow: Output</Notes>
+    </Task>
+    <Task>
+      <UID>113</UID>
+      <ID>113</ID>
+      <Name>Standard Team | importing-a-CSV-file-into-Mongo-DB_1.4.0-SNAPSHOT::csv-to-mongodbFlow1 (5 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT40H0M0S</Work>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>
+Story Points: 5
+Team: Standard Team
+Application: importing-a-CSV-file-into-Mongo-DB_1.4.0-SNAPSHOT
+Flow: csv-to-mongodbFlow1</Notes>
+    </Task>
+    <Task>
+      <UID>125</UID>
+      <ID>125</ID>
+      <Name>Standard Team | document-integration-using-the-cmis-connector_1.4.0-SNAPSHOT::CMIS (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: document-integration-using-the-cmis-connector_1.4.0-SNAPSHOT
+Flow: CMIS</Notes>
+    </Task>
+    <Task>
+      <UID>137</UID>
+      <ID>137</ID>
+      <Name>Standard Team | mule-expression-language-basics_1.4.0-SNAPSHOT::docs-greetingFlow5 (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: mule-expression-language-basics_1.4.0-SNAPSHOT
+Flow: docs-greetingFlow5</Notes>
+    </Task>
+    <Task>
+      <UID>149</UID>
+      <ID>149</ID>
+      <Name>Standard Team | soap-webservice-security_1.4.0-SNAPSHOT::SecurityClients (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: soap-webservice-security_1.4.0-SNAPSHOT
+Flow: SecurityClients</Notes>
+    </Task>
+    <Task>
+      <UID>161</UID>
+      <ID>161</ID>
+      <Name>Standard Team | http-request-response-with-logger_1.4.0-SNAPSHOT::EchoFlow (2 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT16H0M0S</Work>
+      <Duration>PT16H0M0S</Duration>
+      <Notes>
+Story Points: 2
+Team: Standard Team
+Application: http-request-response-with-logger_1.4.0-SNAPSHOT
+Flow: EchoFlow</Notes>
+    </Task>
+    <Task>
+      <UID>173</UID>
+      <ID>173</ID>
+      <Name>Standard Team | processing-orders-with-dataweave-and-APIkit_1.4.0-SNAPSHOT::get:/currencies:currency-config (1 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT8H0M0S</Work>
+      <Duration>PT8H0M0S</Duration>
+      <Notes>
+Story Points: 1
+Team: Standard Team
+Application: processing-orders-with-dataweave-and-APIkit_1.4.0-SNAPSHOT
+Flow: get:/currencies:currency-config</Notes>
+    </Task>
+    <Task><UID>18</UID><ID>18</ID><Name>Sprint 8</Name><Summary>1</Summary></Task>
+    <Task>
+      <UID>69</UID>
+      <ID>69</ID>
+      <Name>Expert Team | service-orchestration-and-choice-routing_1.4.0-SNAPSHOT::databaseInitialisation (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Expert Team
+Application: service-orchestration-and-choice-routing_1.4.0-SNAPSHOT
+Flow: databaseInitialisation</Notes>
+    </Task>
+    <Task>
+      <UID>81</UID>
+      <ID>81</ID>
+      <Name>Expert Team | foreach-processing-and-choice-routing_1.4.0-SNAPSHOT::Bank2Flow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Expert Team
+Application: foreach-processing-and-choice-routing_1.4.0-SNAPSHOT
+Flow: Bank2Flow</Notes>
+    </Task>
+    <Task>
+      <UID>95</UID>
+      <ID>95</ID>
+      <Name>Expert Team | sap-data-retrieval_1.4.0-SNAPSHOT::get:/salesOrders:sap-api-config (13 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT104H0M0S</Work>
+      <Duration>PT104H0M0S</Duration>
+      <Notes>
+Story Points: 13
+Team: Expert Team
+Application: sap-data-retrieval_1.4.0-SNAPSHOT
+Flow: get:/salesOrders:sap-api-config</Notes>
+    </Task>
+    <Task>
+      <UID>57</UID>
+      <ID>57</ID>
+      <Name>Senior Team | rest-api-with-apikit_1.4.0-SNAPSHOT::get:/teams:leagues-config (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Senior Team
+Application: rest-api-with-apikit_1.4.0-SNAPSHOT
+Flow: get:/teams:leagues-config</Notes>
+    </Task>
+    <Task>
+      <UID>114</UID>
+      <ID>114</ID>
+      <Name>Standard Team | importing-an-email-attachment-using-the-IMAP-connector_1.4.0-SNAPSHOT::imap-to-csvFlow1 (5 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT40H0M0S</Work>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>
+Story Points: 5
+Team: Standard Team
+Application: importing-an-email-attachment-using-the-IMAP-connector_1.4.0-SNAPSHOT
+Flow: imap-to-csvFlow1</Notes>
+    </Task>
+    <Task>
+      <UID>126</UID>
+      <ID>126</ID>
+      <Name>Standard Team | exposing-a-restful-resource-using-the-HTTP-connector_1.4.0-SNAPSHOT::retrievePersonFlow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: exposing-a-restful-resource-using-the-HTTP-connector_1.4.0-SNAPSHOT
+Flow: retrievePersonFlow</Notes>
+    </Task>
+    <Task>
+      <UID>138</UID>
+      <ID>138</ID>
+      <Name>Standard Team | mule-expression-language-basics_1.4.0-SNAPSHOT::greetingFlow6 (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: mule-expression-language-basics_1.4.0-SNAPSHOT
+Flow: greetingFlow6</Notes>
+    </Task>
+    <Task>
+      <UID>150</UID>
+      <ID>150</ID>
+      <Name>Standard Team | soap-webservice-security_1.4.0-SNAPSHOT::UsernameTokenServiceFlow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: soap-webservice-security_1.4.0-SNAPSHOT
+Flow: UsernameTokenServiceFlow</Notes>
+    </Task>
+    <Task>
+      <UID>162</UID>
+      <ID>162</ID>
+      <Name>Standard Team | login-form-using-the-http-connector_1.4.0-SNAPSHOT::GetLoginPageFlow (2 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT16H0M0S</Work>
+      <Duration>PT16H0M0S</Duration>
+      <Notes>
+Story Points: 2
+Team: Standard Team
+Application: login-form-using-the-http-connector_1.4.0-SNAPSHOT
+Flow: GetLoginPageFlow</Notes>
+    </Task>
+    <Task>
+      <UID>174</UID>
+      <ID>174</ID>
+      <Name>Standard Team | processing-orders-with-dataweave-and-APIkit_1.4.0-SNAPSHOT-2::get:/currencies:currency-config (1 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT8H0M0S</Work>
+      <Duration>PT8H0M0S</Duration>
+      <Notes>
+Story Points: 1
+Team: Standard Team
+Application: processing-orders-with-dataweave-and-APIkit_1.4.0-SNAPSHOT-2
+Flow: get:/currencies:currency-config</Notes>
+    </Task>
+    <Task><UID>19</UID><ID>19</ID><Name>Sprint 9</Name><Summary>1</Summary></Task>
+    <Task>
+      <UID>70</UID>
+      <ID>70</ID>
+      <Name>Expert Team | testing-apikit-with-munit_1.4.0-SNAPSHOT::api-main (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Expert Team
+Application: testing-apikit-with-munit_1.4.0-SNAPSHOT
+Flow: api-main</Notes>
+    </Task>
+    <Task>
+      <UID>82</UID>
+      <ID>82</ID>
+      <Name>Expert Team | foreach-processing-and-choice-routing_1.4.0-SNAPSHOT::Bank3Flow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Expert Team
+Application: foreach-processing-and-choice-routing_1.4.0-SNAPSHOT
+Flow: Bank3Flow</Notes>
+    </Task>
+    <Task>
+      <UID>96</UID>
+      <ID>96</ID>
+      <Name>Expert Team | sap-data-retrieval_1.4.0-SNAPSHOT::get:/materials:sap-api-config (13 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT104H0M0S</Work>
+      <Duration>PT104H0M0S</Duration>
+      <Notes>
+Story Points: 13
+Team: Expert Team
+Application: sap-data-retrieval_1.4.0-SNAPSHOT
+Flow: get:/materials:sap-api-config</Notes>
+    </Task>
+    <Task>
+      <UID>58</UID>
+      <ID>58</ID>
+      <Name>Senior Team | rest-api-with-apikit_1.4.0-SNAPSHOT::get:/teams/{teamId}:leagues-config (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Senior Team
+Application: rest-api-with-apikit_1.4.0-SNAPSHOT
+Flow: get:/teams/{teamId}:leagues-config</Notes>
+    </Task>
+    <Task>
+      <UID>115</UID>
+      <ID>115</ID>
+      <Name>Standard Team | mule-expression-language-basics_1.4.0-SNAPSHOT::docs-greetingFlow4 (5 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT40H0M0S</Work>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>
+Story Points: 5
+Team: Standard Team
+Application: mule-expression-language-basics_1.4.0-SNAPSHOT
+Flow: docs-greetingFlow4</Notes>
+    </Task>
+    <Task>
+      <UID>127</UID>
+      <ID>127</ID>
+      <Name>Standard Team | extracting-data-from-LDAP-directory_1.4.0-SNAPSHOT::ldapFlow1 (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: extracting-data-from-LDAP-directory_1.4.0-SNAPSHOT
+Flow: ldapFlow1</Notes>
+    </Task>
+    <Task>
+      <UID>139</UID>
+      <ID>139</ID>
+      <Name>Standard Team | munit-short-tutorial_1.4.0-SNAPSHOT::exampleFlow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: munit-short-tutorial_1.4.0-SNAPSHOT
+Flow: exampleFlow</Notes>
+    </Task>
+    <Task>
+      <UID>151</UID>
+      <ID>151</ID>
+      <Name>Standard Team | soap-webservice-security_1.4.0-SNAPSHOT::UsernameTokenSignedServiceFlow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: soap-webservice-security_1.4.0-SNAPSHOT
+Flow: UsernameTokenSignedServiceFlow</Notes>
+    </Task>
+    <Task>
+      <UID>163</UID>
+      <ID>163</ID>
+      <Name>Standard Team | login-form-using-the-http-connector_1.4.0-SNAPSHOT::CallLoginFlowUsingRequester (2 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT16H0M0S</Work>
+      <Duration>PT16H0M0S</Duration>
+      <Notes>
+Story Points: 2
+Team: Standard Team
+Application: login-form-using-the-http-connector_1.4.0-SNAPSHOT
+Flow: CallLoginFlowUsingRequester</Notes>
+    </Task>
+    <Task><UID>20</UID><ID>20</ID><Name>Sprint 10</Name><Summary>1</Summary></Task>
+    <Task>
+      <UID>71</UID>
+      <ID>71</ID>
+      <Name>Expert Team | testing-apikit-with-munit_1.4.0-SNAPSHOT::get:/munit:api-config (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Expert Team
+Application: testing-apikit-with-munit_1.4.0-SNAPSHOT
+Flow: get:/munit:api-config</Notes>
+    </Task>
+    <Task>
+      <UID>83</UID>
+      <ID>83</ID>
+      <Name>Expert Team | foreach-processing-and-choice-routing_1.4.0-SNAPSHOT::Bank4Flow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Expert Team
+Application: foreach-processing-and-choice-routing_1.4.0-SNAPSHOT
+Flow: Bank4Flow</Notes>
+    </Task>
+    <Task>
+      <UID>97</UID>
+      <ID>97</ID>
+      <Name>Expert Team | service-orchestration-and-choice-routing_1.4.0-SNAPSHOT::orderRequest (13 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT104H0M0S</Work>
+      <Duration>PT104H0M0S</Duration>
+      <Notes>
+Story Points: 13
+Team: Expert Team
+Application: service-orchestration-and-choice-routing_1.4.0-SNAPSHOT
+Flow: orderRequest</Notes>
+    </Task>
+    <Task>
+      <UID>59</UID>
+      <ID>59</ID>
+      <Name>Senior Team | rest-api-with-apikit_1.4.0-SNAPSHOT::delete:/teams/{teamId}:leagues-config (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Senior Team
+Application: rest-api-with-apikit_1.4.0-SNAPSHOT
+Flow: delete:/teams/{teamId}:leagues-config</Notes>
+    </Task>
+    <Task>
+      <UID>116</UID>
+      <ID>116</ID>
+      <Name>Standard Team | salesforce-data-retrieval_1.4.0-SNAPSHOT::showFormFlow (5 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT40H0M0S</Work>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>
+Story Points: 5
+Team: Standard Team
+Application: salesforce-data-retrieval_1.4.0-SNAPSHOT
+Flow: showFormFlow</Notes>
+    </Task>
+    <Task>
+      <UID>128</UID>
+      <ID>128</ID>
+      <Name>Standard Team | http-login-html-form::httpMultipartRequestFlow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: http-login-html-form
+Flow: httpMultipartRequestFlow</Notes>
+    </Task>
+    <Task>
+      <UID>140</UID>
+      <ID>140</ID>
+      <Name>Standard Team | munit-short-tutorial_1.4.0-SNAPSHOT::exampleFlow2 (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: munit-short-tutorial_1.4.0-SNAPSHOT
+Flow: exampleFlow2</Notes>
+    </Task>
+    <Task>
+      <UID>152</UID>
+      <ID>152</ID>
+      <Name>Standard Team | soap-webservice-security_1.4.0-SNAPSHOT::UsernameTokenEncryptedServiceFlow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: soap-webservice-security_1.4.0-SNAPSHOT
+Flow: UsernameTokenEncryptedServiceFlow</Notes>
+    </Task>
+    <Task>
+      <UID>164</UID>
+      <ID>164</ID>
+      <Name>Standard Team | mule-component-bindings::mule-component-bindingsFlow1 (2 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT16H0M0S</Work>
+      <Duration>PT16H0M0S</Duration>
+      <Notes>
+Story Points: 2
+Team: Standard Team
+Application: mule-component-bindings
+Flow: mule-component-bindingsFlow1</Notes>
+    </Task>
+    <Task><UID>21</UID><ID>21</ID><Name>Sprint 11</Name><Summary>1</Summary></Task>
+    <Task>
+      <UID>72</UID>
+      <ID>72</ID>
+      <Name>Expert Team | testing-apikit-with-munit_1.4.0-SNAPSHOT::put:/munit:api-config (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Expert Team
+Application: testing-apikit-with-munit_1.4.0-SNAPSHOT
+Flow: put:/munit:api-config</Notes>
+    </Task>
+    <Task>
+      <UID>84</UID>
+      <ID>84</ID>
+      <Name>Expert Team | foreach-processing-and-choice-routing_1.4.0-SNAPSHOT::Bank5Flow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Expert Team
+Application: foreach-processing-and-choice-routing_1.4.0-SNAPSHOT
+Flow: Bank5Flow</Notes>
+    </Task>
+    <Task>
+      <UID>98</UID>
+      <ID>98</ID>
+      <Name>Expert Team | service-orchestration-and-choice-routing_1.4.0-SNAPSHOT::samsungOrder (13 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT104H0M0S</Work>
+      <Duration>PT104H0M0S</Duration>
+      <Notes>
+Story Points: 13
+Team: Expert Team
+Application: service-orchestration-and-choice-routing_1.4.0-SNAPSHOT
+Flow: samsungOrder</Notes>
+    </Task>
+    <Task>
+      <UID>60</UID>
+      <ID>60</ID>
+      <Name>Senior Team | rest-api-with-apikit_1.4.0-SNAPSHOT::get:/positions:leagues-config (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Senior Team
+Application: rest-api-with-apikit_1.4.0-SNAPSHOT
+Flow: get:/positions:leagues-config</Notes>
+    </Task>
+    <Task>
+      <UID>117</UID>
+      <ID>117</ID>
+      <Name>Standard Team | salesforce-to-MySQL-DB-using-Batch-Processing_1.4.0-SNAPSHOT::triggerFlow (5 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT40H0M0S</Work>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>
+Story Points: 5
+Team: Standard Team
+Application: salesforce-to-MySQL-DB-using-Batch-Processing_1.4.0-SNAPSHOT
+Flow: triggerFlow</Notes>
+    </Task>
+    <Task>
+      <UID>129</UID>
+      <ID>129</ID>
+      <Name>Standard Team | http-oauth-provider::protectedAuthcodeFlow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: http-oauth-provider
+Flow: protectedAuthcodeFlow</Notes>
+    </Task>
+    <Task>
+      <UID>141</UID>
+      <ID>141</ID>
+      <Name>Standard Team | oauth2-authorization-code-using-the-HTTP-connector_1.4.0-SNAPSHOT::boxUserLoginFlow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: oauth2-authorization-code-using-the-HTTP-connector_1.4.0-SNAPSHOT
+Flow: boxUserLoginFlow</Notes>
+    </Task>
+    <Task>
+      <UID>153</UID>
+      <ID>153</ID>
+      <Name>Standard Team | xml-only-soap-webservice_1.4.0-SNAPSHOT::PatientService (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: xml-only-soap-webservice_1.4.0-SNAPSHOT
+Flow: PatientService</Notes>
+    </Task>
+    <Task>
+      <UID>165</UID>
+      <ID>165</ID>
+      <Name>Standard Team | mule-component-bindings::TwitterFlow (2 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT16H0M0S</Work>
+      <Duration>PT16H0M0S</Duration>
+      <Notes>
+Story Points: 2
+Team: Standard Team
+Application: mule-component-bindings
+Flow: TwitterFlow</Notes>
+    </Task>
+    <Task><UID>22</UID><ID>22</ID><Name>Sprint 12</Name><Summary>1</Summary></Task>
+    <Task>
+      <UID>73</UID>
+      <ID>73</ID>
+      <Name>Expert Team | testing-apikit-with-munit_1.4.0-SNAPSHOT::delete:/munit:api-config (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Expert Team
+Application: testing-apikit-with-munit_1.4.0-SNAPSHOT
+Flow: delete:/munit:api-config</Notes>
+    </Task>
+    <Task>
+      <UID>85</UID>
+      <ID>85</ID>
+      <Name>Expert Team | salesforce-data-synchronization-using-watermarking-and-batch-processing_1.4.0-SNAPSHOT::triggerFlow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Expert Team
+Application: salesforce-data-synchronization-using-watermarking-and-batch-processing_1.4.0-SNAPSHOT
+Flow: triggerFlow</Notes>
+    </Task>
+    <Task>
+      <UID>99</UID>
+      <ID>99</ID>
+      <Name>Expert Team | service-orchestration-and-choice-routing_1.4.0-SNAPSHOT::auditService (13 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT104H0M0S</Work>
+      <Duration>PT104H0M0S</Duration>
+      <Notes>
+Story Points: 13
+Team: Expert Team
+Application: service-orchestration-and-choice-routing_1.4.0-SNAPSHOT
+Flow: auditService</Notes>
+    </Task>
+    <Task>
+      <UID>61</UID>
+      <ID>61</ID>
+      <Name>Senior Team | rest-api-with-apikit_1.4.0-SNAPSHOT::get:/fixture:leagues-config (8 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT64H0M0S</Work>
+      <Duration>PT64H0M0S</Duration>
+      <Notes>
+Story Points: 8
+Team: Senior Team
+Application: rest-api-with-apikit_1.4.0-SNAPSHOT
+Flow: get:/fixture:leagues-config</Notes>
+    </Task>
+    <Task>
+      <UID>118</UID>
+      <ID>118</ID>
+      <Name>Standard Team | soap-webservice-security_1.4.0-SNAPSHOT::SamlTokenServiceFlow (5 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT40H0M0S</Work>
+      <Duration>PT40H0M0S</Duration>
+      <Notes>
+Story Points: 5
+Team: Standard Team
+Application: soap-webservice-security_1.4.0-SNAPSHOT
+Flow: SamlTokenServiceFlow</Notes>
+    </Task>
+    <Task>
+      <UID>130</UID>
+      <ID>130</ID>
+      <Name>Standard Team | implementing-a-choice-exception-strategy_1.4.0-SNAPSHOT::choice-error-handlingFlow1 (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: implementing-a-choice-exception-strategy_1.4.0-SNAPSHOT
+Flow: choice-error-handlingFlow1</Notes>
+    </Task>
+    <Task>
+      <UID>142</UID>
+      <ID>142</ID>
+      <Name>Standard Team | oauth2-authorization-code-using-the-HTTP-connector_1.4.0-SNAPSHOT::userLoginDoneFlow (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: oauth2-authorization-code-using-the-HTTP-connector_1.4.0-SNAPSHOT
+Flow: userLoginDoneFlow</Notes>
+    </Task>
+    <Task>
+      <UID>154</UID>
+      <ID>154</ID>
+      <Name>Standard Team | xml-only-soap-webservice_1.4.0-SNAPSHOT::EHRService (3 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT24H0M0S</Work>
+      <Duration>PT24H0M0S</Duration>
+      <Notes>
+Story Points: 3
+Team: Standard Team
+Application: xml-only-soap-webservice_1.4.0-SNAPSHOT
+Flow: EHRService</Notes>
+    </Task>
+    <Task>
+      <UID>166</UID>
+      <ID>166</ID>
+      <Name>Standard Team | mule-expression-language-basics_1.4.0-SNAPSHOT::greetingFlow1 (2 SP)</Name>
+      <Summary>0</Summary>
+      <OutlineLevel>2</OutlineLevel>
+      <Work>PT16H0M0S</Work>
+      <Duration>PT16H0M0S</Duration>
+      <Notes>
+Story Points: 2
+Team: Standard Team
+Application: mule-expression-language-basics_1.4.0-SNAPSHOT
+Flow: greetingFlow1</Notes>
+    </Task>
+  </Tasks>
+</Project>
