@@ -10,7 +10,7 @@ This document outlines the comprehensive methodology used in the **Mule Applicat
 
 ### **What Are Story Points?**
 
-Story points are a unit of measure used to estimate the relative effort required to complete a user story or task. In our migration project, story points represent the **complexity and effort** required to migrate individual Mule flows to Apache Camel.
+Story points are a unit of measure used to estimate the relative effort required to complete a user story or task. In our project, story points represent the **complexity and effort** required to migrate individual Mule flow to another technology.
 
 ### **Our Story Points Calculation Formula**
 
@@ -37,24 +37,119 @@ Story Points = Base Complexity + Risk Multiplier + API Bonus + DataWeave Complex
 
 ### **Complexity Scoring Factors**
 
-1. **Structural Complexity**
-   - Direct steps: 2 points each
-   - Nested steps: 4 points each
-   - Deep nested steps: 6 points each
+1. **Flow Complexity**
 
-2. **Integration Complexity**
-   - Connectors: 3 points each
-   - Error handlers: 1 point each
+    | Parameter | Weight | Description | Complexity Reasoning |
+    |-----------|-------:|-------------|----------------------|
+    | Direct Step Count | 3 | Steps directly in the flow | Basic processing complexity |
+    | Nested Step Count | 6 | Steps containing other steps | Nested logic increases complexity |
+    | Deep Nested Step Count | 9 | Steps nested ≥3 levels deep | Deep nesting is exponentially complex |
+    | Unique Step Types | 2 | Variety of step types used | More variety = more expertise needed |
+    | Unique External References | 4 | External components referenced | Dependencies increase complexity |
+    | ApiKit Reference Count | 2 | References to API specifications | API integration complexity |
+    | Error Handler Count | 2 | Flow-specific error handlers | Error-handling complexity |
+    | Connectors Count | 3 | Integration Complexity | Integration Complexity |
+     | DataWeave Component Complexity | Variable | DataWeave Complexity | Comprehensive DW complexity 
 
-3. **DataWeave Complexity**
-   - DW scripts: 3 points each
-   - Average complexity: 2 points per complexity level
-   - Maximum complexity: 1 point per complexity level
-
-4. **API Complexity**
+2. **API Complexity**
    - API kit routes: 2 points each
    - API schemas: 4 points each
    - API actions: 1 point each
+
+3. **DataWeave Complexity**
+
+   | Parameter | Weight | Description | Complexity Reasoning |
+   |-----------|-------:|-------------|----------------------|
+   | DataWeave Depth | 3 | Nesting depth of DW expressions | Deep nesting exponentially increases complexity |
+   | Function Count | 2 | Custom functions defined | Custom functions add reusability but also complexity |
+   | Filter Count | 2 | Number of filter operations | Filtering logic adds conditional paths |
+   | Import Count | 1 | Number of module imports | External dependencies add mental overhead |
+   | Call Count | 3 | Number of function calls | Each call introduces execution overhead and traceability cost |
+   | Map Count | 2 | Number of map operations | Mapping operations add transformation complexity |
+   | OrderBy, GroupBy Count | 2 | Number of Mule 3 operations | Mule 3 operations add transformation complexity |
+   | Unique DataWeave Types | 3 | Variety of DW script types | Different DW patterns add complexity |
+   
+
+> **How it's used**  `ComplexityScore = Σ(parameterValue × Weight)` where *Variable* weight equals the parameter's own weight defined in the component catalogue.  
+> The score is normalised (÷10)
+
+**Flow Complexity Categories**
+
+| Score Range | Category | Description |
+|-------------|----------|-------------|
+| 100+ | VERY_HIGH | Extremely complex flows |
+| 60-99 | HIGH | Highly complex flows |
+| 30-59 | MEDIUM | Moderate complexity with advanced features |
+| 0-9 | VERY_LOW | Minimal complexity flows |
+
+### How to Use These Categories
+1. Calculate each flow's `ComplexityScore` using the weighted parameters above.
+2. Locate the resulting score in the table and assign the corresponding category.
+3. During sprint planning use the category to:
+   - Allocate flows to the most suitable team (see *Team Structure* section).
+   - Select the appropriate Story Point band.
+   - Determine the mandatory testing scope (see *Testing Strategy*).
+4. Track category distribution across sprints to ensure balanced workload and risk.
+
+### Why This Matters
+* **Objective measurement** – replaces gut-feel with a repeatable metric.
+* **Risk-based prioritisation** – VERY_HIGH and HIGH flows surface early in the roadmap.
+* **Resource alignment** – matches complexity with team expertise, preventing overload.
+* **Quality assurance** – scales testing effort in proportion to complexity.
+* **Transparent communication** – provides a concise way to convey technical difficulty to non-technical stakeholders.
+
+---
+
+##  TESTING STRATEGY & EFFORT ESTIMATION
+
+Robust testing is baked into our story-point model.  The effort allocated to testing grows with **flow complexity**, **layer criticality** and **connector surface area**.
+
+### 1. Test Pyramid & Types
+| Level | Test Type | Mule Layer Focus | Goal |
+|-------|-----------|------------------|------|
+| Unit   | MUnit, DW unit scripts | All layers | Validate small, isolated logic paths |
+| Component | Flow-scope tests (with mocks) | System / Process | Verify flow orchestration & error handling |
+| Integration | End-to-end with real connectors | System / Process | Ensure external systems & DB calls work |
+| **End-to-End** | Cross-application scenario tests | All layers combined | Validate complete business workflow across systems |
+| API / Contract | RAML-based tests (e.g., APIKit Console, OAS tests) | Experience | Guarantee contract correctness |
+| Performance | Soak / load (JMeter, Gatling) | High-throughput flows | Validate latency & throughput targets |
+| Security | AuthZ/AuthN, OWASP scans | Public APIs | Protect against common vulnerabilities |
+
+### 2. Testing Effort Matrix
+| Flow Complexity | Base Test Effort (% of SP) | Connector Count Modifier* | Layer Modifier** | Typical Test Suite |
+|-----------------|---------------------------:|--------------------------:|-----------------:|-------------------|
+| Low (≤5 comps)  | 10 % | +2 % if ≥3 ext. connectors | +0 % | Unit + happy-path component |
+| Medium (6-12)   | 15 % | +3 % if ≥3 ext. connectors | +2 % if Experience layer | Unit + component + integration |
+| High (>12)      | 20 % | +5 % if ≥3 ext. connectors | +5 % if Experience layer | Full pyramid incl. perf & security |
+
+*External connectors = HTTP, DB, JMS, SAP, etc.  
+**Experience-layer flows are user-facing; extra contract & security tests are mandatory.
+
+### 3. How the Formula Works
+```
+TestingEffort = BaseTestEffort + ConnectorModifier + LayerModifier
+StoryPointsTesting = round(StoryPoints * TestingEffort)
+```
+Example: High-complexity Experience flow with 4 connectors → 20 % + 5 % + 5 % = **30 %** testing overhead.
+
+### 4. Automation Principles
+1. **Shift-left** – write tests in parallel with code.
+2. **Mocks first** – isolate external dependencies for fast feedback.
+3. **CI gate** – fail the pipeline if any mandatory test tier fails.
+4. **Test data management** – version-controlled stub datasets per environment.
+
+### 5. End-to-End Scenario Coverage
+End-to-End (E2E) tests stitch multiple applications and layers together—starting from an external API call (Experience layer), travelling through Process orchestration down to System integrations, then back to the caller.
+
+* **Scope** – critical order-to-cash, customer-onboarding or other business journeys.
+* **Environment** – dedicated staging environment with all target systems available or emulated.
+* **Tooling** – Cucumber, Karate, Postman collections, Selenium (if UI involved).
+* **Ownership** – jointly maintained by all teams; each sprint adds E2E scripts for the application completed in that sprint.
+* **Effort Accounting** – E2E automation + execution effort is included in the *Performance/Security* row for High-complexity flows, typically adding **5-8 %** extra points at the release-candidate stage.
+
+> Passing E2E tests is a hard gate for declaring an application "done".
+
+> Allocating explicit story-point budget for testing ensures quality does not erode under schedule pressure and makes testing capacity transparent during sprint planning.
 
 ---
 
@@ -139,11 +234,11 @@ Total Capacity: 720 story points
 
 ---
 
-## 🛤️ CRITICAL PATH ANALYSIS
+##  CRITICAL PATH ANALYSIS
 
 ### **What is Critical Path?**
 
-The **Critical Path** is the sequence of dependent tasks that determines the minimum project duration. In our migration project, the critical path follows the **Mule 3-Layer Architecture dependencies**.
+The **Critical Path** is the sequence of dependent tasks that determines the minimum project duration. In our project, the critical path follows the **Mule 3-Layer Architecture dependencies**.
 
 ### **Our Critical Path: Layer Dependencies**
 
@@ -176,9 +271,51 @@ System Layer → Process Layer → Experience Layer
 3. **Buffer Management**: 15% time buffer for critical path activities
 4. **Resource Allocation**: Expert team assigned to critical path work
 
+##  PROJECT TIMELINE OVERVIEW
+
+The **Project Timeline** translates the critical-path phases into a simple calendar that everyone—developers, testers, managers, and business stakeholders—can reference at a glance.  It captures *when* each architectural layer will be migrated, the sprint boundaries, and the high-level objectives that drive acceptance criteria for each phase.
+
+| Phase | Layer Focus | Sprint Range | Week Range | Primary Objective |
+|-------|-------------|--------------|------------|-------------------|
+| **Foundation** | System Layer | 1 – 4 | 1 – 8 | Establish core system integrations and data access patterns |
+| **Orchestration** | Process Layer | 5 – 8 | 9 – 16 | Build business logic, orchestration flows, and error handling |
+| **API Delivery** | Experience Layer | 9 – 12 | 17 – 24 | Expose stable external and internal APIs, complete contract tests |
+
+### Project Timeline Parameters
+| Parameter | Value | Notes |
+|-----------|-------|-------|
+| Project Duration | **24 weeks** (12 sprints) | Aligns with Foundation → Orchestration → API Delivery phases |
+| Sprint Length | **2 weeks** | Standard iteration allowing regular inspect-and-adapt cycles |
+| Velocity (Total Capacity) | **60 story points / sprint** | Combined capacity of all teams as defined in Team Structure |
+| Velocity Buffer | **15 %** (~9 SP per sprint) | Reserved for unplanned work, risk mitigation and scope changes |
+
+**How to Use This Timeline**
+1. Align sprint goals and backlog items with the phase objectives listed above.
+2. Schedule cross-team dependencies so that downstream layers (Process, Experience) never begin before upstream layers (System, Process) reach their “definition of done.”
+3. Communicate upcoming milestones to stakeholders using the week ranges as anchors for demos, testing cycles, and releases.
+4. Re-evaluate phase boundaries during sprint reviews; if velocity changes, adjust the sprint range while keeping the sequential order intact.
+
+> Keeping the timeline visible in sprint boards and status reports ensures that day-to-day task planning remains connected to the bigger delivery picture.
+
 ---
 
-## 📉 BURN DOWN METHODOLOGY
+##  APPLICATION-BY-APPLICATION DELIVERY PRINCIPLE
+
+Dependency-driven layer sequencing is only half of the story.  
+Our primary objective is to **finish complete applications**—System, Process and Experience layers inclusive—so that business value is realised early and integration risk is contained within clear boundaries.
+
+**Key guidelines**
+1. **Vertical slices first** – Whenever possible select a *single application* (or a tightly-coupled cluster) and migrate all of its flows through every layer within the same set of sprints.
+2. **Done means DONE** – An application is considered complete only when all flows are migrated, automated tests pass, documentation is updated and the app can be deployed independently.
+3. **Cross-team collaboration** – Expert, Senior and Standard teams work in parallel on the chosen app, each owning flows that match their complexity range, mirroring the collaboration plan outlined in `PLANNING_SP.md`.
+4. **Risk containment** – Finishing an application end-to-end reduces the window in which partially-migrated logic is in use, simplifying rollback and support.
+5. **Business feedback loops** – Delivering a fully working application earlier enables stakeholders to validate behaviour and request adjustments before the bulk of the migration is complete.
+
+> **Why not pure layer sequencing?**  In practise, working horizontally across all applications at once can create huge Work-In-Progress, slow feedback and complicate testing.  Combining **layer discipline inside an application** with an **application-by-application release rhythm** provides the best of both worlds.
+
+---
+
+##  BURN DOWN METHODOLOGY
 
 ### **What is Burn Down?**
 
@@ -214,14 +351,18 @@ A **Burn Down Chart** tracks the amount of work remaining in a sprint or project
 
 ---
 
-##  SCRIPT IMPROVEMENT PROPOSALS
+##  SPRINT KEY ALGORITHMS
 
-### **Current Script Limitations**
+### **Key Algorithms  & Supporting Scripts**
 
-1. **Manual Layer Detection**: Requires human verification
-2. **Static Risk Thresholds**: Fixed complexity boundaries
-3. **Limited Similarity Matching**: Basic pattern recognition
-4. **Single Team Assignment**: No shared ownership model
+| # | Algorithm | Value Delivered | Core Script(s) |
+|---|-------------|-----------------|----------------|
+| 1 | **Automated Layer Detection** | Eliminates manual tagging; ensures flows are consistently mapped to *System / Process / Experience* layers. | `mule-layer-detection.cypher` |
+| 2 | **Dynamic Risk Thresholds** | Risk scoring now blends story-point weight **plus** connector count, DataWeave density and API exposure; thresholds auto-tune to velocity & defect data. | `standalone-risk-analysis.cypher`, `dynamic-risk-thresholds.cypher` |
+| 3 | **Topology-Aware Cosine Similarity** | Builds a high-dimensional vector from each flow's **topology** (step order, nesting depth) and **functional step categories**; cosine distance groups flows that implement analogous logic, driving reuse and shared test suites. | `standalone-similarity-analysis.cypher`, `similarity-enhanced-assignments.cypher` |
+| 4 | **Multi-Team Ownership Model** | Allows primary/support team relationships; scales large similarity groups across teams without bottlenecks. | `layer-aware-team-planning.cypher`, `similarity-enhanced-assignments.cypher` |
+
+> The scripts listed implement these improvements; use them as is or extend to fit future needs.
 
 ### **Proposed Improvements**
 
@@ -626,7 +767,7 @@ orders-api::process-complex-order | 12 | 4 | 38.4 | WELL_STAFFED
 
 #### **Workload Assessment Categories**
 - ** FULLY_UTILIZED**: 85-100% capacity usage
-- **👍 WELL_UTILIZED**: 60-85% capacity usage  
+- **WELL_UTILIZED**: 60-85% capacity usage  
 - ** UNDER_UTILIZED**: <60% capacity usage
 - ** OVERALLOCATED**: >100% capacity usage
 
@@ -650,7 +791,7 @@ ANALYSIS → DESIGN → DEVELOPMENT → TESTING → DOCUMENTATION
 
 ---
 
-## 🗺️ ROADMAP BUILDING PRINCIPLES
+##  ROADMAP BUILDING PRINCIPLES
 
 ### **Sprint Planning Phases**
 
@@ -731,7 +872,7 @@ Total Score = Layer Alignment + Risk Priority + Team Specialization + Complexity
 
 ---
 
-## 🎓 LESSONS LEARNED
+## LESSONS LEARNED
 
 ### **Best Practices**
 1. **Layer-First Approach**: Understand architectural layers before assignment
@@ -775,7 +916,7 @@ This methodology is designed to evolve based on:
 
 ### **Overview of Planning Methodologies**
 
-Our migration project supports **three distinct sprint planning approaches**, each optimized for different project characteristics, team compositions, and organizational priorities. Understanding the differences helps you choose the most appropriate approach for your specific migration context.
+Our project supports **three distinct sprint planning approaches**, each optimized for different project characteristics, team compositions, and organizational priorities. Understanding the differences helps you choose the most appropriate approach for your specific migration context.
 
 ---
 
@@ -1236,7 +1377,7 @@ The Team Workload Summary shows how work is distributed across your teams, inclu
 Team            | SkillLevel    | TotalStories | TotalStoryPoints | SprintsInvolved | SpecializationWork | HighRiskWork | AvgStoryPointsPerSprint | EfficiencyRating
 ----------------|---------------|--------------|------------------|-----------------|--------------------|--------------|-------------------------|------------------
 Expert Team     | EXPERT        | 32           | 280              | 10              | 28                 | 24           | 28.0                    |  HIGH_EFFICIENCY
-Senior Team     | SENIOR        | 45           | 324              | 12              | 38                 | 18           | 27.0                    | 👍 GOOD_EFFICIENCY
+Senior Team     | SENIOR        | 45           | 324              | 12              | 38                 | 18           | 27.0                    |  GOOD_EFFICIENCY
 Standard Team   | INTERMEDIATE  | 48           | 216              | 11              | 35                 | 8            | 19.6                    |  HIGH_EFFICIENCY
 ```
 
@@ -1296,9 +1437,9 @@ The Application Migration Schedule shows when each Mule application and its flow
 ```
 Application     | FlowName              | Sprint | Phase                | StartWeek | EndWeek | Team            | RiskLevel   | StoryPoints | ComplexityLevel
 ----------------|-----------------------|--------|----------------------|-----------|---------|-----------------|-------------|-------------|----------------
-uhub-sapi      | get-health-check      | 1      | PHASE 1: Foundation | 1         | 2       | Standard Team   | LOW_RISK    | 2           | LOW
-uhub-sapi      | get-customer-by-id    | 2      | PHASE 1: Foundation | 3         | 4       | Senior Team     | MEDIUM_RISK | 8           | MEDIUM_HIGH
-uhub-sapi      | post-customer-create  | 3      | PHASE 1: Foundation | 5         | 6       | Expert Team     | HIGH_RISK   | 12          | HIGH
+proxying-a-rest-api      | get-health-check      | 1      | PHASE 1: Foundation | 1         | 2       | Standard Team   | LOW_RISK    | 2           | LOW
+proxying-a-rest-api      | get-customer-by-id    | 2      | PHASE 1: Foundation | 3         | 4       | Senior Team     | MEDIUM_RISK | 8           | MEDIUM_HIGH
+proxying-a-rest-api      | post-customer-create  | 3      | PHASE 1: Foundation | 5         | 6       | Expert Team     | HIGH_RISK   | 12          | HIGH
 orders-api     | get-order-status      | 4      | PHASE 2: Core Migration| 7      | 8       | Senior Team     | MEDIUM_RISK | 6           | MEDIUM
 orders-api     | process-order-payment | 5      | PHASE 2: Core Migration| 9      | 10      | Expert Team     | HIGH_RISK   | 15          | HIGH
 ```
@@ -1416,198 +1557,13 @@ ORDER BY Week;
 
 ##  **OUTPUT VALIDATION FRAMEWORK**
 
+> Implementation note  
+> The Cypher snippets below are **not just samples** – they are consolidated in reusable scripts inside the `Cypher/` folder:
+> • `verification-script.cypher` – master timeline & workload checks  
+> • `validate-sprint-balance.cypher`, `validate-team-balance.cypher` – sprint and team-level distribution rules  
+> • `check-application-planning-results.cypher` – application coverage assertions  
+> • `check-data-status.cypher` – readiness pre-checks before planning  
+> You can run these directly or embed them in your CI pipeline.
+
 ### **Comprehensive Validation Script**
-```cypher
-// MASTER VALIDATION SCRIPT
-// Run this to validate all outputs
-
-// 1. Sprint Timeline Validation
-MATCH (sb:SprintBacklog)
-WITH count(DISTINCT sb.sprintNumber) as TotalSprints,
-     min(sb.sprintNumber) as MinSprint,
-     max(sb.sprintNumber) as MaxSprint,
-     count(sb) as TotalItems
-RETURN '=== SPRINT TIMELINE VALIDATION ===' as Section,
-       TotalSprints, MinSprint, MaxSprint, TotalItems,
-       CASE 
-           WHEN TotalSprints = 12 AND MinSprint = 1 AND MaxSprint = 12 
-           THEN ' COMPLETE'
-           ELSE ' INCOMPLETE'
-       END as TimelineStatus;
-
-// 2. Team Workload Validation
-MATCH (sb:SprintBacklog)
-WITH sb.teamName as Team,
-     count(sb) as TotalStories,
-     sum(sb.storyPoints) as TotalStoryPoints,
-     count(DISTINCT sb.sprintNumber) as SprintsInvolved
-RETURN '=== TEAM WORKLOAD VALIDATION ===' as Section,
-       Team, TotalStories, TotalStoryPoints, SprintsInvolved,
-       round(TotalStoryPoints / SprintsInvolved, 1) as AvgPointsPerSprint,
-       CASE 
-           WHEN TotalStoryPoints / SprintsInvolved BETWEEN 15 AND 35 
-           THEN ' BALANCED'
-           ELSE ' UNBALANCED'
-       END as WorkloadStatus;
-
-// 3. Application Coverage Validation
-MATCH (app:MuleApp)-[:HAS_FLOW]->(flow:Flow)
-OPTIONAL MATCH (sb:SprintBacklog)
-WHERE sb.appName = app.name AND sb.flowName = flow.flow
-WITH app.name as Application,
-     count(flow) as TotalFlows,
-     count(sb) as ScheduledFlows
-RETURN '=== APPLICATION COVERAGE VALIDATION ===' as Section,
-       Application, TotalFlows, ScheduledFlows,
-       CASE 
-           WHEN ScheduledFlows = TotalFlows 
-           THEN ' FULLY SCHEDULED'
-           ELSE ' MISSING: ' + toString(TotalFlows - ScheduledFlows)
-       END as CoverageStatus;
-
-// 4. Weekly Timeline Validation
-WITH range(1, 24) as AllWeeks
-UNWIND AllWeeks as Week
-OPTIONAL MATCH (sb:SprintBacklog)
-WHERE sb.startWeek <= Week AND sb.endWeek >= Week
-WITH Week, count(sb) as WorkItems, sum(sb.storyPoints) as StoryPoints
-RETURN '=== WEEKLY TIMELINE VALIDATION ===' as Section,
-       Week, WorkItems, COALESCE(StoryPoints, 0) as StoryPoints,
-       CASE 
-           WHEN WorkItems > 0 
-           THEN ' WORK SCHEDULED'
-           ELSE ' NO WORK'
-       END as WeekStatus
-ORDER BY Week;
 ```
-
----
-
-##  **EXPORT AND INTEGRATION**
-
-### **CSV Export Formats**
-
-#### **Sprint Timeline Export**
-```csv
-Sprint,Phase,StartWeek,EndWeek,TotalStories,TotalStoryPoints,Teams,HighRisk,MediumRisk,LowRisk,WorkloadLevel
-1,PHASE 1: Foundation,1,2,12,45,"Expert Team;Senior Team",8,3,1,MEDIUM_WORKLOAD
-2,PHASE 1: Foundation,3,4,11,52,"Expert Team;Standard Team",6,4,1,HIGH_WORKLOAD
-```
-
-#### **Team Workload Export**
-```csv
-Team,SkillLevel,TotalStories,TotalStoryPoints,SprintsInvolved,SpecializationWork,HighRiskWork,EfficiencyRating
-Expert Team,EXPERT,32,280,10,28,24,HIGH_EFFICIENCY
-Senior Team,SENIOR,45,324,12,38,18,GOOD_EFFICIENCY
-```
-
-#### **Application Schedule Export**
-```csv
-Application,FlowName,Sprint,Phase,StartWeek,EndWeek,Team,RiskLevel,StoryPoints,ComplexityLevel
-uhub-sapi,get-health-check,1,PHASE 1: Foundation,1,2,Standard Team,LOW_RISK,2,LOW
-uhub-sapi,get-customer-by-id,2,PHASE 1: Foundation,3,4,Senior Team,MEDIUM_RISK,8,MEDIUM_HIGH
-```
-
-### **Integration with Project Management Tools**
-
-#### **Jira Integration**
-```cypher
-// Export format for Jira import
-MATCH (sb:SprintBacklog)
-RETURN sb.uniqueId as IssueKey,
-       sb.flowName as Summary,
-       'Migration of ' + sb.appName + '::' + sb.flowName as Description,
-       sb.storyPoints as StoryPoints,
-       sb.riskLevel as Priority,
-       sb.teamName as Assignee,
-       sb.sprintNumber as Sprint,
-       sb.complexityLevel as Component;
-```
-
-#### **Microsoft Project Integration**
-```cypher
-// Export format for MS Project
-MATCH (sb:SprintBacklog)
-RETURN sb.uniqueId as TaskID,
-       sb.flowName as TaskName,
-       sb.startWeek as StartWeek,
-       sb.endWeek as EndWeek,
-       sb.storyPoints as Duration,
-       sb.teamName as ResourceName,
-       sb.appName as Milestone;
-```
-
-### **Real-Time Monitoring Dashboards**
-
-#### **Executive Dashboard Metrics**
-```cypher
-// Key metrics for executive dashboard
-MATCH (sb:SprintBacklog)
-WITH count(sb) as TotalStories,
-     sum(sb.storyPoints) as TotalStoryPoints,
-     count(DISTINCT sb.appName) as TotalApplications,
-     count(DISTINCT sb.teamName) as TotalTeams,
-     count(CASE WHEN sb.riskLevel = 'HIGH_RISK' THEN 1 END) as HighRiskStories,
-     min(sb.startWeek) as ProjectStart,
-     max(sb.endWeek) as ProjectEnd
-RETURN TotalStories, TotalStoryPoints, TotalApplications, TotalTeams,
-       HighRiskStories, ProjectStart, ProjectEnd,
-       (ProjectEnd - ProjectStart + 1) as ProjectDurationWeeks,
-       round(HighRiskStories * 100.0 / TotalStories, 1) as HighRiskPercentage;
-```
-
----
-
-##  **SUCCESS CRITERIA AND QUALITY GATES**
-
-### **Timeline Quality Gates**
--  **12 Sprints Planned**: All sprints have assigned work
--  **24-Week Duration**: Project fits within planned timeline
--  **Balanced Workload**: 15-35 story points per week
--  **Phase Progression**: Logical progression through 4 phases
-
-### **Team Workload Quality Gates**
--  **Balanced Distribution**: No team over 40% of total work
--  **Specialization Alignment**: 60%+ work matches team expertise
--  **Risk Distribution**: Expert teams handle 60%+ high-risk work
--  **Capacity Utilization**: 80-95% team capacity utilization
-
-### **Application Coverage Quality Gates**
--  **Complete Coverage**: All applications scheduled for migration
--  **Dependency Respect**: System before Process before Experience
--  **Risk Prioritization**: High-risk applications in early phases
--  **Business Alignment**: Critical applications prioritized
-
-### **Weekly Timeline Quality Gates**
--  **Continuous Work**: Work scheduled for all 24 weeks
--  **Milestone Alignment**: Key deliverables at appropriate intervals
--  **Resource Continuity**: Teams have consistent work allocation
--  **Progress Tracking**: Weekly deliverables clearly defined
-
----
-
-##  **CONTINUOUS MONITORING AND ADJUSTMENT**
-
-### **Weekly Review Process**
-1. **Progress Tracking**: Compare actual vs. planned completion
-2. **Risk Assessment**: Identify new risks or risk changes
-3. **Resource Adjustment**: Reallocate teams based on performance
-4. **Timeline Adjustment**: Adjust schedules based on actual velocity
-
-### **Monthly Review Process**
-1. **Velocity Analysis**: Review team velocity and adjust capacity
-2. **Quality Assessment**: Review delivered quality and adjust approaches
-3. **Stakeholder Communication**: Update stakeholders on progress
-4. **Methodology Refinement**: Adjust processes based on lessons learned
-
-### **Continuous Improvement Metrics**
-- **Velocity Trends**: Track team velocity over time
-- **Quality Metrics**: Defect rates, rework percentages
-- **Risk Realization**: Actual vs. predicted risk outcomes
-- **Stakeholder Satisfaction**: Regular feedback collection
-
----
-
-**Version**: 1.2
-**Last Updated**: [Current Date]
-**Next Review**: [Quarterly Review Date] 
