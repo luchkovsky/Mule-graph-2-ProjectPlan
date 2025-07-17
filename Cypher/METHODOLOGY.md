@@ -48,7 +48,10 @@ Story Points = Base Complexity + Risk Multiplier + API Bonus + DataWeave Complex
     | Unique External References | 4 | External components referenced | Dependencies increase complexity |
     | ApiKit Reference Count | 2 | References to API specifications | API integration complexity |
     | Error Handler Count | 2 | Flow-specific error handlers | Error-handling complexity |
-    | Connectors Count | 3 | Integration Complexity | Integration Complexity |
+    | Connectors Count | 3 | Number of external connectors (declared + in-flow connector steps) | Integration surface area |
+    | Batch Job Count | 5 | Number of `batch:job` steps | Batch processing adds stateful execution complexity |
+    | Async Indicator Count | 3 | VM/JMS/AMQP publish, until-successful steps | Asynchronous messaging increases concurrency complexity |
+    | Async Flow Flag | 8 | Flow marked asynchronous or contains async indicators | Orchestration overhead of fully async flows |
      | DataWeave Component Complexity | Variable | DataWeave Complexity | Comprehensive DW complexity 
 
 2. **API Complexity**
@@ -65,6 +68,7 @@ Story Points = Base Complexity + Risk Multiplier + API Bonus + DataWeave Complex
    | Filter Count | 2 | Number of filter operations | Filtering logic adds conditional paths |
    | Import Count | 1 | Number of module imports | External dependencies add mental overhead |
    | Call Count | 3 | Number of function calls | Each call introduces execution overhead and traceability cost |
+   | Field Count | 1 | Number of field-access operations | Field-level transformations add mapping complexity |
    | Map Count | 2 | Number of map operations | Mapping operations add transformation complexity |
    | OrderBy, GroupBy Count | 2 | Number of Mule 3 operations | Mule 3 operations add transformation complexity |
    | Unique DataWeave Types | 3 | Variety of DW script types | Different DW patterns add complexity |

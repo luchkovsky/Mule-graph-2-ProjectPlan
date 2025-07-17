@@ -1,6 +1,21 @@
 // VERIFICATION SCRIPT - Check Results After Running All Steps
 // Run this script to verify everything is working correctly
 
+// Node labels and their properties
+CALL apoc.meta.nodeTypeProperties()
+YIELD nodeType, propertyName, propertyTypes
+RETURN nodeType              AS Label,
+       collect(propertyName + ' : ' + apoc.text.join(propertyTypes, ',')) AS Properties
+ORDER BY Label;
+
+// Relationship types and their properties
+CALL apoc.meta.relTypeProperties()
+YIELD relType, propertyName, propertyTypes
+RETURN relType               AS Relationship,
+       collect(propertyName + ' : ' + apoc.text.join(propertyTypes, ',')) AS Properties
+ORDER BY Relationship;
+
+
 // 1. BASIC COUNTS VERIFICATION
 MATCH (app:MuleApp)
 MATCH (flow:Flow)

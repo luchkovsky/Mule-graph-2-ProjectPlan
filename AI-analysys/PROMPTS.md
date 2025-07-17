@@ -73,14 +73,6 @@ application, flow bundle examples, and the story-point allocation per team.
 Include a short explanatory note below the table.
 ```
 
----
-
-## 6. House-Keeping & File Management
-```
-• Rename files as needed to use the spelling "ANALISYS" consistently.
-• Create a folder `AI-analysys` at project root and move ANALISYS.md and
-  planning documents into it.
-```
 
 ---
 

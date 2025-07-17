@@ -15,9 +15,8 @@
 
 WITH {
     // Structural Complexity Coefficients
-    directStepWeight: 2,           // Base: 2, Conservative: 3, Experienced: 1.5
     nestedStepWeight: 4,           // Base: 4, Conservative: 6, Experienced: 3
-    deepNestedStepWeight: 6,       // Base: 6, Legacy: 8-10, Modern: 4-5
+
     
     // DataWeave Complexity Coefficients
     dwScriptCountWeight: 3,        // Base: 3, DW experts: 2, DW beginners: 5
@@ -38,6 +37,11 @@ WITH {
     apiKitResourceWeight: 1,       // Base: 1
     apiKitSchemaWeight: 4,         // Base: 4, API experts: 3, Beginners: 6-8
     apiKitActionWeight: 1,         // Base: 1
+    
+    // Batch / Asynchrony Complexity Coefficients
+    batchJobWeight: 5,            // Extra weight for each batch:job step
+    asyncFlowWeight: 8,           // Extra weight if the flow executes asynchronously
+    asyncIndicatorWeight: 3,      // Per async-related step (VM/JMS publish, until-successful, etc.)
     
     // Risk Multipliers
     highRiskMultiplier: 1.5,       // Base: 1.5, Risk-averse: 1.8, Experienced: 1.3
@@ -63,14 +67,10 @@ WITH {
 // ==============================================================
 
 MATCH (app:MuleApp)-[:HAS_FLOW]->(flow:Flow)
-OPTIONAL MATCH (flow)-[:HAS_STEP]->(step:Step)
-OPTIONAL MATCH (step)-[:HAS_STEP]->(nestedStep:Step)
-OPTIONAL MATCH (nestedStep)-[:HAS_STEP]->(deepNestedStep:Step)
+MATCH (flow)-[:HAS_STEP]->(step:Step)
+MATCH (flow)-[:HAS_STEP *]->(anyStep:Step)
 OPTIONAL MATCH (flow)-[:HAS_ERROR_HANDLER]->(eh:ErrorHandler)
 OPTIONAL MATCH (flow)-[:REFS_ON]->(apikit:ApiKit)
-
-// Step types and categories
-OPTIONAL MATCH (flow)-[:HAS_STEP*0..5]->(anyStep:Step)
 
 // DataWeave analysis using Script depth and lambdas
 OPTIONAL MATCH (anyStep)-[:HAS_DW]->(dw:Script)
@@ -87,9 +87,7 @@ OPTIONAL MATCH (app)-[:HAS_CONNECTOR]->(connector:Connector)
 // Calculate flow complexity metrics with story point focus
 WITH app, flow, coefficients,
      // Step hierarchy complexity
-     count(DISTINCT step) as directStepCount,
-     count(DISTINCT nestedStep) as nestedStepCount,
-     count(DISTINCT deepNestedStep) as deepNestedStepCount,
+     count(DISTINCT anyStep) as nestedStepCount,
      
      // Step diversity
      count(DISTINCT anyStep.type) as uniqueStepTypes,
@@ -111,50 +109,71 @@ WITH app, flow, coefficients,
      count(DISTINCT schema) as apiKitSchemaCount,
      count(DISTINCT route.action) as apiKitActionCount,
      
-     // Connector complexity
-     count(DISTINCT connector) as connectorCount,
+     // Connector complexity (explicit Connector nodes + steps whose category = 'connector')
+     count(DISTINCT connector) + count(DISTINCT CASE WHEN anyStep.category = 'connector' THEN anyStep END) as connectorCount,
+
+     // Batch processing complexity (Batch Module)
+     count(DISTINCT CASE WHEN anyStep.type = 'batch:job' OR anyStep.category = 'Batch' THEN anyStep END) as batchJobCount,
+
+     // Async indicators: VM/JMS/AMQP publish-style steps or until-successful scopes
+     count(DISTINCT CASE WHEN anyStep.type IN ['vm:publish','vm:publish-consume','jms:publish','jms:publish-consume','amqp:publish','async:until-successful'] THEN anyStep END) as asyncIndicatorCount,
+
+     // Asynchronous flow flag (derive from property or detected indicators)
+     CASE WHEN coalesce(flow.isAsync, flow.async, false) OR count(DISTINCT CASE WHEN anyStep.type IN ['vm:publish','vm:publish-consume','jms:publish','jms:publish-consume','amqp:publish','async:until-successful'] THEN anyStep END) > 0 THEN true ELSE false END as isAsyncFlow,
      
      // API exposure detection
      CASE WHEN count(DISTINCT ak) > 0 THEN true ELSE false END as isApiExposed
 
-// ADDITION: DataWeave fine-grained metrics (function, filter, import, call counts)
-OPTIONAL MATCH (dw)-[:HAS_FUNCTION]->(dwFunc:DW_Function)
-OPTIONAL MATCH (dw)-[:HAS_FILTER]->(dwFilter:DW_Filter)
-OPTIONAL MATCH (dw)-[:HAS_IMPORT]->(dwImport:DW_Import)
-OPTIONAL MATCH (dw)-[:HAS_CALL]->(dwCall:DW_Call)
+// -----------------------------------------------------------------------------
+//  ADDITION: Fine-grained DataWeave metrics anchored to the CURRENT FLOW
+//  (the previous version lost the "dw" variable after the first WITH, causing
+//   all counts to default to zero if scripts were not re-matched).  We now
+//   re-match DataWeave scripts starting from the current `flow` so every count
+//   is calculated **per-flow**.
+// -----------------------------------------------------------------------------
+
+// Re-match DataWeave scripts that belong to this flow
+OPTIONAL MATCH (flow)-[:HAS_STEP*]->(:Step)-[:HAS_DW]->(dwScript:Script)
+
+// Fine-grained DW components
+OPTIONAL MATCH (dwScript)-[:HAS_FUNCTION]->(dwFunc:Function)
+OPTIONAL MATCH (dwScript)-[:HAS_FILTER|HAS_MAP|HAS_DISTINCTBY]->(dwFilter)
+OPTIONAL MATCH (dwScript)-[:HAS_IMPORT]->(dwImport:Import)
+OPTIONAL MATCH (dwScript)-[:HAS_CALL]->(dwCall:Call)
+OPTIONAL MATCH (dwScript)-[:HAS_FIELD]->(dwField:Field)
 
 // Calculate counts (default 0 when null)
 WITH app, flow, coefficients,
-     directStepCount, nestedStepCount, deepNestedStepCount,
+     nestedStepCount,
      uniqueStepTypes, uniqueStepCategories, errorHandlerCount,
      dwScriptCount, avgDwDepth, maxDwDepth, totalDwLambdas,
      apiKitRouteCount, apiKitCount, apiKitResourceCount, apiKitSchemaCount, apiKitActionCount,
-     connectorCount, isApiExposed,
+     connectorCount, batchJobCount, asyncIndicatorCount, isAsyncFlow, isApiExposed,
      count(DISTINCT dwFunc)   AS dwFunctionCount,
      count(DISTINCT dwFilter) AS dwFilterCount,
      count(DISTINCT dwImport) AS dwImportCount,
+     count(DISTINCT dwField)  AS dwFieldCount,
      count(DISTINCT dwCall)   AS dwCallCount
 
 // -----------------------------------------------------------------------------
 // Compute base complexity, categories, and risk flags now that all counts exist
 // -----------------------------------------------------------------------------
 WITH app, flow, coefficients,
-     directStepCount, nestedStepCount, deepNestedStepCount,
+     nestedStepCount,
      uniqueStepTypes, uniqueStepCategories, errorHandlerCount,
      dwScriptCount, avgDwDepth, maxDwDepth, totalDwLambdas,
      apiKitRouteCount, apiKitCount, apiKitResourceCount, apiKitSchemaCount, apiKitActionCount,
-     connectorCount, isApiExposed,
-     dwFunctionCount, dwFilterCount, dwImportCount, dwCallCount
+     connectorCount, batchJobCount, asyncIndicatorCount, isAsyncFlow, isApiExposed,
+     dwFunctionCount, dwFilterCount, dwImportCount, dwCallCount, dwFieldCount
 
 // Enhanced complexity calculation
-WITH app, flow, coefficients, directStepCount, nestedStepCount, deepNestedStepCount,
+WITH app, flow, coefficients, nestedStepCount,
      uniqueStepTypes, uniqueStepCategories, errorHandlerCount, dwScriptCount, avgDwDepth,
      maxDwDepth, totalDwLambdas, apiKitRouteCount, apiKitCount, apiKitResourceCount,
-     apiKitSchemaCount, apiKitActionCount, connectorCount, isApiExposed,
-     dwFunctionCount, dwFilterCount, dwImportCount, dwCallCount,
-     (directStepCount * coefficients.directStepWeight +
+     apiKitSchemaCount, apiKitActionCount, connectorCount, asyncIndicatorCount, isAsyncFlow, isApiExposed,
+     dwFunctionCount, dwFilterCount, dwImportCount, dwCallCount, dwFieldCount,
+     (
       nestedStepCount * coefficients.nestedStepWeight +
-      deepNestedStepCount * coefficients.deepNestedStepWeight +
       dwScriptCount * coefficients.dwScriptCountWeight +
       avgDwDepth * coefficients.dwAvgComplexityWeight +
       maxDwDepth * coefficients.dwMaxComplexityWeight +
@@ -170,21 +189,26 @@ WITH app, flow, coefficients, directStepCount, nestedStepCount, deepNestedStepCo
       dwFunctionCount * 2 +
       dwFilterCount   * 2 +
       dwImportCount   * 1 +
-      dwCallCount     * 3) AS baseComplexityScore
+      dwFieldCount    * 1 +
+      dwCallCount     * 3 +
+      batchJobCount   * coefficients.batchJobWeight +
+      asyncIndicatorCount * coefficients.asyncIndicatorWeight +
+      (CASE WHEN isAsyncFlow THEN coefficients.asyncFlowWeight ELSE 0 END)
+      ) AS baseComplexityScore
 
 // Continue with original logic
-WITH app, flow, coefficients, directStepCount, nestedStepCount, deepNestedStepCount,
+WITH app, flow, coefficients, nestedStepCount, 
      uniqueStepTypes, uniqueStepCategories, errorHandlerCount, dwScriptCount, avgDwDepth,
      maxDwDepth, totalDwLambdas, apiKitRouteCount, apiKitCount, apiKitResourceCount,
-     apiKitSchemaCount, apiKitActionCount, connectorCount, isApiExposed,
-     dwFunctionCount, dwFilterCount, dwImportCount, dwCallCount, baseComplexityScore
+     apiKitSchemaCount, apiKitActionCount, connectorCount, asyncIndicatorCount, isAsyncFlow, isApiExposed,
+     dwFunctionCount, dwFilterCount, dwImportCount, dwCallCount, dwFieldCount, baseComplexityScore
 
 // API complexity categorization
-WITH app, flow, coefficients, directStepCount, nestedStepCount, deepNestedStepCount,
+WITH app, flow, coefficients, nestedStepCount, 
      uniqueStepTypes, uniqueStepCategories, errorHandlerCount, dwScriptCount, avgDwDepth,
      maxDwDepth, totalDwLambdas, apiKitRouteCount, apiKitCount, apiKitResourceCount,
-     apiKitSchemaCount, apiKitActionCount, connectorCount, isApiExposed,
-     dwFunctionCount, dwFilterCount, dwImportCount, dwCallCount, baseComplexityScore,
+     apiKitSchemaCount, apiKitActionCount, connectorCount, asyncIndicatorCount, isAsyncFlow, isApiExposed, 
+     dwFunctionCount, dwFilterCount, dwFieldCount, dwImportCount, dwCallCount, baseComplexityScore,
      CASE 
          WHEN apiKitRouteCount >= 5 AND apiKitSchemaCount >= 2 THEN 'COMPLEX_API'
          WHEN apiKitRouteCount >= 3 OR apiKitSchemaCount >= 1 THEN 'MODERATE_API'
@@ -200,22 +224,22 @@ WITH app, flow, coefficients, directStepCount, nestedStepCount, deepNestedStepCo
 
 // Apply risk multipliers and calculate final complexity
 WITH app, flow, coefficients,
-     directStepCount, nestedStepCount, deepNestedStepCount,
+      nestedStepCount, 
      uniqueStepTypes, uniqueStepCategories, errorHandlerCount,
      dwScriptCount, avgDwDepth, maxDwDepth, totalDwLambdas,
      apiKitRouteCount, apiKitCount, apiKitResourceCount, apiKitSchemaCount,
-     connectorCount, isApiExposed, apiComplexityCategory, riskFlags,
+     connectorCount, asyncIndicatorCount, isAsyncFlow, isApiExposed, apiComplexityCategory, riskFlags,
      baseComplexityScore,
-     dwFunctionCount, dwFilterCount, dwImportCount, dwCallCount
+     dwFunctionCount, dwFilterCount, dwImportCount, dwCallCount, dwFieldCount
 // Compute enhanced complexity first
 WITH app, flow, coefficients,
-     directStepCount, nestedStepCount, deepNestedStepCount,
+     nestedStepCount, 
      uniqueStepTypes, uniqueStepCategories, errorHandlerCount,
      dwScriptCount, avgDwDepth, maxDwDepth, totalDwLambdas,
      apiKitRouteCount, apiKitCount, apiKitResourceCount, apiKitSchemaCount,
-     connectorCount, isApiExposed, apiComplexityCategory, riskFlags,
+     connectorCount, asyncIndicatorCount, isAsyncFlow, isApiExposed, apiComplexityCategory, riskFlags,
      baseComplexityScore,
-     dwFunctionCount, dwFilterCount, dwImportCount, dwCallCount,
+     dwFunctionCount, dwFilterCount, dwImportCount, dwCallCount, dwFieldCount,
      (baseComplexityScore * CASE 
          WHEN riskFlags >= 3 THEN coefficients.highRiskMultiplier
          WHEN riskFlags = 2 THEN coefficients.mediumRiskMultiplier
@@ -224,25 +248,27 @@ WITH app, flow, coefficients,
      END) AS enhancedComplexityScore
 // Now derive simplicityFlag
 WITH app, flow, coefficients,
-     directStepCount, nestedStepCount, deepNestedStepCount,
+     nestedStepCount, 
      uniqueStepTypes, uniqueStepCategories, errorHandlerCount,
      dwScriptCount, avgDwDepth, maxDwDepth, totalDwLambdas,
      apiKitRouteCount, apiKitCount, apiKitResourceCount, apiKitSchemaCount,
-     connectorCount, isApiExposed, apiComplexityCategory, riskFlags,
+     connectorCount, asyncIndicatorCount, isAsyncFlow, isApiExposed, apiComplexityCategory, riskFlags,
      baseComplexityScore, enhancedComplexityScore,
-     dwFunctionCount, dwFilterCount, dwImportCount, dwCallCount,
+     dwFunctionCount, dwFilterCount, dwImportCount, dwCallCount, dwFieldCount,
      CASE WHEN enhancedComplexityScore <= coefficients.trivialThreshold * 2 THEN 1 ELSE 0 END AS simplicityFlag
 
 // Calculate story points using configurable thresholds
 WITH app, flow, coefficients,
-     directStepCount, nestedStepCount, deepNestedStepCount,
+     nestedStepCount, 
      uniqueStepTypes, uniqueStepCategories, errorHandlerCount,
      dwScriptCount, avgDwDepth, maxDwDepth, totalDwLambdas,
      apiKitRouteCount, apiKitCount, connectorCount,
      isApiExposed, apiComplexityCategory, riskFlags,
      baseComplexityScore, enhancedComplexityScore,
-     dwFunctionCount, dwFilterCount, dwImportCount, dwCallCount,
+     dwFunctionCount, dwFilterCount, dwImportCount, dwCallCount, dwFieldCount,
      simplicityFlag,
+     asyncIndicatorCount,
+     isAsyncFlow,
      
      // Base story points from complexity score
      CASE 
@@ -278,18 +304,18 @@ WITH app, flow, coefficients,
 
 // Calculate final story points and normalize to Fibonacci scale
 WITH app, flow, 
-     directStepCount, nestedStepCount, deepNestedStepCount,
+     nestedStepCount, 
      uniqueStepTypes, uniqueStepCategories, errorHandlerCount,
      dwScriptCount, avgDwDepth, maxDwDepth, totalDwLambdas,
      apiKitRouteCount, apiKitCount, connectorCount,
      isApiExposed, apiComplexityCategory, riskFlags,
      baseComplexityScore, enhancedComplexityScore,
      baseStoryPoints, apiStoryPoints, dwStoryPoints,
-     dwFunctionCount, dwFilterCount, dwImportCount, dwCallCount,
+     dwFunctionCount, dwFilterCount, dwImportCount, dwCallCount, dwFieldCount,
      simplicityFlag,
-     
-     // Raw story points total
-     baseStoryPoints + apiStoryPoints + dwStoryPoints as rawStoryPoints,
+     asyncIndicatorCount,
+     isAsyncFlow,
+     (baseStoryPoints + apiStoryPoints + dwStoryPoints) as rawStoryPoints,
      
      // Normalize to Fibonacci scale (1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144)
      CASE 
@@ -339,7 +365,21 @@ SET flow.baseComplexityScore = baseComplexityScore,
     flow.dwFunctionCount = dwFunctionCount,
     flow.dwFilterCount = dwFilterCount,
     flow.dwImportCount  = dwImportCount,
-    flow.dwCallCount    = dwCallCount
+    flow.dwCallCount    = dwCallCount,
+    flow.dwFieldCount   = dwFieldCount,
+    flow.asyncIndicatorCount = asyncIndicatorCount,
+    flow.isAsyncFlow = isAsyncFlow,
+    // Persist step diversity & hierarchy metrics for validation
+    flow.nestedStepCount       = nestedStepCount,
+    flow.uniqueStepTypes       = uniqueStepTypes,
+    flow.uniqueStepCategories  = uniqueStepCategories,
+    flow.errorHandlerCount     = errorHandlerCount,
+    flow.apiKitRouteCount      = apiKitRouteCount,
+    flow.apiKitCount           = apiKitCount,
+    flow.avgDwDepth            = avgDwDepth,
+    flow.maxDwDepth            = maxDwDepth,
+    flow.totalDwLambdas        = totalDwLambdas,
+    flow.dwFieldCount          = dwFieldCount
 
 RETURN 
     app.name as ApplicationName,
@@ -358,9 +398,7 @@ RETURN
     storyPointCategory as StoryPointCategory,
     
     // Component metrics
-    directStepCount as DirectSteps,
     nestedStepCount as NestedSteps,
-    deepNestedStepCount as DeepNestedSteps,
     uniqueStepTypes as UniqueStepTypes,
     uniqueStepCategories as UniqueStepCategories,
     
