@@ -24,13 +24,18 @@ WITH app, flows,
      reduce(s = 0, f IN flows | s + (CASE WHEN f.isApiExposed THEN 1 ELSE 0 END)) AS apiExposedFlows,
      reduce(s = 0, f IN flows | s + coalesce(f.apiKitRouteCount,0)) AS totalApiKitRoutes,
      reduce(s = 0, f IN flows | s + coalesce(f.apiKitCount,0))      AS totalApiKits,
-     reduce(s = 0, f IN flows | s + (CASE WHEN f.riskFlags >= 3 THEN 1 ELSE 0 END)) AS highRiskFlows
+     reduce(s = 0, f IN flows | s + (CASE WHEN f.riskFlags >= 3 THEN 1 ELSE 0 END)) AS highRiskFlows,
+     // Component complexity aggregates
+     reduce(s = 0, f IN flows | s + coalesce(f.nestedStepCount,0))        AS totalNestedSteps,
+     reduce(s = 0, f IN flows | s + coalesce(f.uniqueStepTypes,0))        AS totalUniqueStepTypes,
+     reduce(s = 0, f IN flows | s + coalesce(f.uniqueStepCategories,0))   AS totalUniqueStepCategories
 
 // 3) Application-level Connector nodes
 OPTIONAL MATCH (app)-[:HAS_CONNECTOR]->(con:Connector)
 WITH app, flows, flowCount, totalStoryPoints, avgStoryPoints,
      totalConnectorCount, totalAsyncIndicators, asyncFlows, apiExposedFlows,
      totalApiKitRoutes, totalApiKits, highRiskFlows,
+     totalNestedSteps, totalUniqueStepTypes, totalUniqueStepCategories,
      collect(DISTINCT con) AS connectorNodes
 
 // 4) Step-level connectors across all flows
@@ -44,8 +49,9 @@ WHERE batchStep.type = 'batch:job' OR batchStep.category = 'batch'
 WITH app, flows, flowCount, totalStoryPoints, avgStoryPoints,
      totalConnectorCount, totalAsyncIndicators, asyncFlows, apiExposedFlows,
      totalApiKitRoutes, totalApiKits, highRiskFlows,
+     totalNestedSteps, totalUniqueStepTypes, totalUniqueStepCategories,
      connectorNodes,
-     collect(DISTINCT coalesce(stepConn.name, stepConn.type)) AS stepConnectorNames,
+     collect(DISTINCT (stepConn.type + ':' + stepConn.name)) AS stepConnectorNames,
      count(DISTINCT stepConn)                                AS stepConnectorCount,
      collect(DISTINCT batchStep)                             AS batchNodes,
      count(DISTINCT batchFlow)                               AS batchFlowCount,
@@ -53,11 +59,17 @@ WITH app, flows, flowCount, totalStoryPoints, avgStoryPoints,
 
 // 5) Database operations & configurations
 OPTIONAL MATCH (app)-[:HAS_FLOW]->(flow)-[:HAS_STEP*]->(dbStep:Step)
-WHERE dbStep.category = 'Database' OR dbStep.type STARTS WITH 'db:'
+WHERE dbStep.category = 'connector'
+  AND (
+        dbStep.properties CONTAINS 'select'
+     OR dbStep.properties CONTAINS 'insert'
+     OR dbStep.properties CONTAINS 'update'
+      )
 OPTIONAL MATCH (dbStep)-[:REFS_ON]->(cfg:Configuration)
 WITH app, flowCount, totalStoryPoints, avgStoryPoints,
      totalConnectorCount, totalAsyncIndicators, asyncFlows, apiExposedFlows,
      totalApiKitRoutes, totalApiKits, highRiskFlows,
+     totalNestedSteps, totalUniqueStepTypes, totalUniqueStepCategories,
      connectorNodes, stepConnectorNames, stepConnectorCount,
      batchFlowCount, totalBatchJobs,
      collect(DISTINCT dbStep)                          AS dbNodes,
@@ -67,12 +79,29 @@ WITH app, flowCount, totalStoryPoints, avgStoryPoints,
 WITH app, flowCount, totalStoryPoints, avgStoryPoints,
      totalConnectorCount, totalAsyncIndicators, asyncFlows, apiExposedFlows,
      totalApiKitRoutes, totalApiKits, highRiskFlows,
+     totalNestedSteps, totalUniqueStepTypes, totalUniqueStepCategories,
      stepConnectorNames, stepConnectorCount,
      batchFlowCount, totalBatchJobs,
      [c IN connectorNodes | c.name]                   AS connectorNames,
      [c IN connectorNodes | c.properties]             AS connectorProperties,
      [d IN dbNodes | coalesce(d.connectorName, d.name, d.type)] AS dbConnectors,
-     [d IN dbNodes | d.properties]                    AS dbQueriesRaw,
+     [d IN dbNodes |
+        coalesce(
+            head([
+                k IN keys(apoc.convert.fromJsonMap(apoc.text.replace(d.properties, '"', '\\"')))
+                WHERE toLower(k) STARTS WITH 
+                    CASE
+                        WHEN d.properties =~ '(?is).*\\bselect\\b.*' THEN 'db:select'
+                        WHEN d.properties =~ '(?is).*\\binsert\\b.*' THEN 'db:insert'
+                        WHEN d.properties =~ '(?is).*\\bupdate\\b.*' THEN 'db:update'
+                        WHEN d.properties =~ '(?is).*\\bdelete\\b.*' THEN 'db:delete'
+                        ELSE ''
+                    END
+                | apoc.convert.fromJsonMap(d.properties)[k]
+            ]),
+            d.properties
+        )
+    ]                    AS dbQueriesRaw,
      dbConnectorsConfig,
      [d IN dbNodes |
         CASE 
@@ -87,8 +116,8 @@ WITH app, flowCount, totalStoryPoints, avgStoryPoints,
 RETURN
     app.name                  AS Application,
     flowCount                 AS FlowCount,
-    totalStoryPoints          AS TotalStoryPoints,
-    avgStoryPoints            AS AvgStoryPoints,
+    //totalStoryPoints        AS TotalStoryPoints,
+    //avgStoryPoints          AS AvgStoryPoints,
     // Story-point composition
     totalApiKitRoutes         AS ApiKitRoutes,
     totalApiKits              AS ApiKits,
@@ -102,6 +131,10 @@ RETURN
     asyncFlows                AS AsyncFlows,
     // Risk aggregation
     highRiskFlows             AS HighRiskFlows,
+    // Component complexity totals
+    totalNestedSteps          AS NestedSteps,
+    totalUniqueStepTypes      AS UniqueStepTypes,
+    totalUniqueStepCategories AS UniqueStepCategories,
     // Named lists for detailed inspection
     connectorNames            AS ConnectorNames,
     connectorProperties       AS ConnectorProperties,

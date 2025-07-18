@@ -15,7 +15,12 @@ OPTIONAL MATCH (app)-[:HAS_CONNECTOR]->(con:Connector)
 
 // Detect DB-related steps for this flow (category='Database' or type prefix 'db:')
 OPTIONAL MATCH (flow)-[:HAS_STEP*]->(dbStep:Step)
-WHERE dbStep.category = 'Database' OR dbStep.type STARTS WITH 'db:'
+WHERE dbStep.category = 'connector'
+  AND (
+        dbStep.properties CONTAINS 'select'
+     OR dbStep.properties CONTAINS 'insert'
+     OR dbStep.properties CONTAINS 'update'
+      )
 OPTIONAL MATCH (dbStep)-[:REFS_ON]->(cfg:Configuration)
 
 // Detect batch processing steps
@@ -55,13 +60,13 @@ WITH app, flow,
      ]                                            AS dbOperations,
      // Batch & step-level connector info
      (size(batchNodes) > 0)                           AS hasBatch,
-     [s IN stepConnNodes | coalesce(s.name, s.type)]  AS stepConnectorNames,
+     [s IN stepConnNodes | s.type + ':' + s.name]     AS stepConnectorNames,
      size(stepConnNodes)                              AS stepConnectorCount,
      [d IN dbNodes |
         coalesce(
             // Try to fetch JSON value whose key starts with the SQL verb
             head([
-                k IN keys(apoc.convert.fromJsonMap(d.properties))
+                k IN keys(apoc.convert.fromJsonMap(apoc.text.replace(d.properties, '"', '\\"')))
                 WHERE toLower(k) STARTS WITH 
                     CASE
                         WHEN d.properties =~ '(?is).*\\bselect\\b.*' THEN 'db:select'
@@ -72,8 +77,6 @@ WITH app, flow,
                     END
                 | apoc.convert.fromJsonMap(d.properties)[k]
             ]),
-            // Fallback: use tagName-specific field if present
-            apoc.convert.fromJsonMap(d.properties)[d.tagName],
             // Final fallback: raw properties string
             d.properties
         )
@@ -83,15 +86,15 @@ RETURN
     app.name                           AS Application,
     flow.flow                          AS FlowName,
     // Complexity scores
-    round(flow.baseComplexityScore,1)      AS BaseComplexityScore,
-    round(flow.enhancedComplexityScore,1)  AS EnhancedComplexityScore,
+    //round(flow.baseComplexityScore,1)      AS BaseComplexityScore,
+    //round(flow.enhancedComplexityScore,1)  AS EnhancedComplexityScore,
     // Story point breakdown
-    flow.baseStoryPoints                AS BaseStoryPoints,
-    flow.apiStoryPoints                 AS ApiStoryPoints,
-    flow.dwStoryPoints                  AS DataWeaveStoryPoints,
-    flow.rawStoryPoints                 AS RawStoryPoints,
-    flow.finalStoryPoints               AS FinalStoryPoints,
-    flow.storyPointCategory             AS StoryPointCategory,
+    //flow.baseStoryPoints                AS BaseStoryPoints,
+    //flow.apiStoryPoints                 AS ApiStoryPoints,
+    //flow.dwStoryPoints                  AS DataWeaveStoryPoints,
+    //flow.rawStoryPoints                 AS RawStoryPoints,
+    //flow.finalStoryPoints               AS FinalStoryPoints,
+    //flow.storyPointCategory             AS StoryPointCategory,
     // Component metrics (saved as properties by previous script)
     flow.nestedStepCount                AS NestedSteps,
     flow.uniqueStepTypes                AS UniqueStepTypes,
@@ -124,15 +127,15 @@ RETURN
     flow.apiKitRouteCount               AS ApiKitRoutes,
     flow.apiKitCount                    AS ApiKits,
     // Risk indicators
-    flow.riskFlags                      AS RiskFlags,
-    CASE 
-        WHEN flow.riskFlags >= 3 THEN 'HIGH_RISK'
-        WHEN flow.riskFlags = 2 THEN 'MEDIUM_RISK'
-        WHEN flow.riskFlags = 1 THEN 'LOW_RISK'
-        ELSE 'MINIMAL_RISK'
-    END                                  AS RiskLevel,
+    // flow.riskFlags                      AS RiskFlags,
+    //CASE 
+      //  WHEN flow.riskFlags >= 3 THEN 'HIGH_RISK'
+      //  WHEN flow.riskFlags = 2 THEN 'MEDIUM_RISK'
+      //  WHEN flow.riskFlags = 1 THEN 'LOW_RISK'
+      //  ELSE 'MINIMAL_RISK'
+    //END                                  AS RiskLevel,
     // Simplicity flag
-    flow.simplicityFlag                 AS SimplicityFlag,
+    // flow.simplicityFlag                 AS SimplicityFlag,
     // Additional DW fine-grained counts
     flow.dwFunctionCount                AS DwFunctionCount,
     flow.dwFilterCount                  AS DwFilterCount,

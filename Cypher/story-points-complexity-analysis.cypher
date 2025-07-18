@@ -113,7 +113,7 @@ WITH app, flow, coefficients,
      count(DISTINCT connector) + count(DISTINCT CASE WHEN anyStep.category = 'connector' THEN anyStep END) as connectorCount,
 
      // Batch processing complexity (Batch Module)
-     count(DISTINCT CASE WHEN anyStep.type = 'batch:job' OR anyStep.category = 'Batch' THEN anyStep END) as batchJobCount,
+     count(DISTINCT CASE WHEN anyStep.type = 'batch:job' OR anyStep.category = 'batch' THEN anyStep END) as batchJobCount,
 
      // Async indicators: VM/JMS/AMQP publish-style steps or until-successful scopes
      count(DISTINCT CASE WHEN anyStep.type IN ['vm:publish','vm:publish-consume','jms:publish','jms:publish-consume','amqp:publish','async:until-successful'] THEN anyStep END) as asyncIndicatorCount,
